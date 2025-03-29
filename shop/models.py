@@ -39,9 +39,11 @@ class Customer(models.Model):
     customer = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
+    age = models.IntegerField(blank=False, default="18")
     phone = models.CharField(max_length=50, blank=False)
     email = models.EmailField(max_length=250)
-
+    shipping_address = models.TextField(blank=False, default="")
+    
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}|age {self.age}"
 

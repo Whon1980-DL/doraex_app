@@ -8,7 +8,7 @@ admin.site.register(Category)
 
 @admin.register(Gadget)
 class GadgetAdmin(admin.ModelAdmin):
-    search_fields = ['gadget_name', 'gadget_detail_desc']
+    search_fields = ['gadget_name', 'detail_description']
     list_filter = ('status', 'created_on')
 
 
