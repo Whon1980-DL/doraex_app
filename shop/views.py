@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import generic
+from .models import Gadget
 
 
 # Create your views here.
-def my_shop(request):
-    return HttpResponse("Hello, DoraEx!")
+class GadgetList(generic.ListView):
+    queryset = Gadget.objects.all()
+    template_name = "gadget_list.html"
