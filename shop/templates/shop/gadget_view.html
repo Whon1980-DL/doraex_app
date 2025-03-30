@@ -6,19 +6,28 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{% static 'images/default.jpg' %}" alt="placeholder" /></div>
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{% static 'images/default.jpg' %}"
+                    alt="placeholder" /></div>
             <div class="col-md-6">
                 <div class="small mb-1">Gadget ID: {{ gadget.gadget_id }}</div>
                 <h1 class="display-5 fw-bolder">{{ gadget.gadget_name }}</h1>
                 <div class="fs-5 mb-5">
-                    <span>£{{ gadget.unit_rent_price }} a day</span><span>Not suitable for anyone under {{ gadget.minimum_usage_age }} year.</span>
+                    <span>£{{ gadget.unit_rent_price }} a day</span><span>Not suitable for anyone under {{
+                        gadget.minimum_usage_age }} year.</span>
                 </div>
                 <p class="lead">{{ gadget.detail_description | safe }}</p>
                 <div class="d-flex">
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                    {% if user.is_authenticated %}
+                    <button class="btn flex-shrink-0 btn-info" type="button">
                         <i class="bi-cart-fill me-1"></i>
                         Rent
                     </button>
+                    {% else %}
+                    <a href="{% url 'account_login' %}">
+                        <button class="btn flex-shrink-0 btn-info" type="button">
+                            Log in to rent
+                        </button></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -26,5 +35,3 @@
 </section>
 
 {% endblock %}
-
-
