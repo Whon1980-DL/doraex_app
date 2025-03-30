@@ -13,8 +13,8 @@ class GadgetList(generic.ListView):
 def category(request, dl):
     # Grab the category from the url
     category = Category.objects.get(category_name=dl)
-    gadgets = Gadget.objects.filter(category=category, status=1)
-    return render(request, 'shop/category.html', {'gadgets': gadgets, 'category': category})
+    gadget = Gadget.objects.filter(category=category, status=1)
+    return render(request, 'shop/category.html', {'gadget': gadget, 'category': category})
 
 
 def gadget_view(request, slug):
