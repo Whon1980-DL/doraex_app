@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Gadget, Customer
+from .models import Category, Gadget, Customer, Renting
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -21,3 +21,6 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ('customer', 'first_name', 'last_name', 'age')
     search_fields = ['last_name']
     list_filter = ('age',)
+
+
+admin.site.register(Renting)

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
 
 # Create your models here.
@@ -33,7 +34,7 @@ class Gadget(models.Model):
         ordering = ['gadget_name']
 
     def __str__(self):
-        return f"{self.gadget_name} created by {self.creater} on {self.created_on}"
+        return self.gadget_name
 
 
 class Customer(models.Model):
@@ -47,4 +48,21 @@ class Customer(models.Model):
     
     def __str__(self):
         return f"{self.first_name} {self.last_name}|age {self.age}"
+
+
+PAYMENT = ((0, "Unpaid"), (1, "Paid"))
+
+
+class Renting(models.Model):
+    gadget = models.ForeignKey(Gadget, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    start_date = models.DateField(default=date.today, blank=False)
+    end_date = models.DateField(default=date.today, blank=False)
+    address = models.CharField(max_length=300, default="", blank=False)
+    phone = models.CharField(max_length=30, default="", blank=True)
+    status = models.IntegerField(choices=PAYMENT, default=0)
+    created_on = models.DateField(default=date.today)
+
+    def __str__(self):
+        return f"{self.customer} rent {self.gadget} from {self.start_date} unitl {self.end_date}"
 
