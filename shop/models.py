@@ -56,6 +56,8 @@ PAYMENT = ((0, "Unpaid"), (1, "Paid"))
 class Renting(models.Model):
     gadget = models.ForeignKey(Gadget, on_delete=models.CASCADE)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50, blank=False, default="")
+    last_name = models.CharField(max_length=50, blank=False, default="")
     start_date = models.DateField(default=date.today, blank=False)
     end_date = models.DateField(default=date.today, blank=False)
     address = models.CharField(max_length=300, default="", blank=False)

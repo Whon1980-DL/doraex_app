@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Gadget, Category, Customer, User
+from .forms import RentingForm
 
 
 # Create your views here.
@@ -42,6 +43,16 @@ def gadget_view(request, slug):
 
 
 def customer_profile(request):
-    # Grab the category from the url
     customer = User.objects.get(id=request.user.id)
     return render(request, 'shop/customer_profile.html', {'customer': customer})
+
+
+def renting_form(request):
+    # Grab the gadget from url
+    renting_form = RentingForm
+
+    return render(
+        request,
+        "shop/renting_form.html",
+        {"renting_form": renting_form},
+    )
