@@ -49,7 +49,7 @@ def customer_profile(request):
 
 def renting_form(request):
     # Grab the gadget from url
-    renting_form = RentingForm
+    renting_form = RentingForm()
 
     return render(
         request,
