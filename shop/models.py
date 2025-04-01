@@ -47,7 +47,7 @@ class Customer(models.Model):
     shipping_address = models.TextField(blank=False, default="")
     
     def __str__(self):
-        return f"{self.first_name} {self.last_name}|age {self.age}"
+        return f"{self.id} {self.first_name} {self.last_name}|age {self.age}"
 
 
 PAYMENT = ((0, "Unpaid"), (1, "Paid"))
@@ -66,5 +66,5 @@ class Renting(models.Model):
     created_on = models.DateField(default=date.today)
 
     def __str__(self):
-        return f"{self.customer} rent {self.gadget} from {self.start_date} unitl {self.end_date}"
+        return f"renting id:{self.id} {self.customer} rent {self.gadget} from {self.start_date} unitl {self.end_date}"
 

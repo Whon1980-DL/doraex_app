@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 from .models import Gadget, Category, Customer, Renting
 from .forms import RentingForm
 
@@ -43,18 +45,25 @@ def gadget_view(request, slug):
 
 
 def customer_profile(request):
-    customer = Customer.objects.get(id=request.user.id)
+    customer = Customer.objects.get(id=request.user.id+2)
+    print(customer)
     print(customer.age)
     return render(request, 'shop/customer_profile.html', {'customer': customer})
 
 
 def renting_form(request, slug):
     print('about to proceed')
-    rentings = Renting.objects.get(id=request.user.id)
     gadget = Gadget.objects.get(slug=slug)
-    customer = Customer.objects.get(id=request.user.id)
     print(gadget)
+    id = request.user.id+10
+    print(id)
+    rentings = Renting.objects.get(id=id)
     print(rentings)
+    customer = Customer.objects.get(id=request.user.id+2)
+    customer_age = customer.age
+    usage_age = gadget.minimum_usage_age
+    print(customer_age)
+    print(usage_age)
     print(customer)
 
     if request.method == "POST":
@@ -75,5 +84,5 @@ def renting_form(request, slug):
     return render(
         request,
         "shop/renting_form.html",
-        {'renting_form': renting_form, 'rentings': rentings, 'gadget': gadget}
+        {'renting_form': renting_form, 'rentings': rentings, 'gadget': gadget, 'customer': customer}
     )
