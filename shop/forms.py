@@ -2,8 +2,17 @@ from .models import Renting
 from django import forms
 
 
+class DatePickerInput(forms.DateInput):
+    input_type = 'date'
+
+
 class RentingForm(forms.ModelForm):
     class Meta:
         model = Renting
-        fields = ('first_name', 'last_name', 'start_date', 'end_date', 'address', 'phone',)
+        fields = ('start_date', 'end_date',)
+
+        widgets = {
+            'start_date': DatePickerInput(),
+            'end_date': DatePickerInput(),
+        }
 

@@ -52,8 +52,10 @@ def renting_form(request, slug):
     print('about to proceed')
     rentings = Renting.objects.get(id=request.user.id)
     gadget = Gadget.objects.get(slug=slug)
+    customer = Customer.objects.get(id=request.user.id)
     print(gadget)
     print(rentings)
+    print(customer)
 
     if request.method == "POST":
         renting_form = RentingForm(data=request.POST)
@@ -61,6 +63,11 @@ def renting_form(request, slug):
             renting = renting_form.save(commit=False)
             renting.customer = request.user
             renting.gadget = gadget
+            renting.first_name = customer.first_name
+            renting.last_name = customer.last_name
+            renting.first_name = customer.shipping_address
+            renting.email = customer.email
+            renting.phone = customer.phone
             renting.save()
 
     renting_form = RentingForm()
