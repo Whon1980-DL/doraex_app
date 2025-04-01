@@ -9,7 +9,7 @@
             <!-- Creating Renting Form -->
             <div class="col-md-4 card mb-4 mt-3">
                 <div class="card-body">
-                    <h3></h3>
+                    <h3>Great choice! You have selected to rent {{ gadget.gadget_name }} please fill in the form to proceed.</h3>
                     <form id="commentForm" method="post" style="margin-top: 1.3em;">
                         {{ renting_form | crispy }}
                         {% csrf_token %}

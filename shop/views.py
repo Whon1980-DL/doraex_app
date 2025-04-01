@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from .models import Gadget, Category, Customer, User
+from .models import Gadget, Category, Customer, Renting
 from .forms import RentingForm
 
 
@@ -43,16 +43,30 @@ def gadget_view(request, slug):
 
 
 def customer_profile(request):
-    customer = User.objects.get(id=request.user.id)
+    customer = Customer.objects.get(id=request.user.id)
+    print(customer.age)
     return render(request, 'shop/customer_profile.html', {'customer': customer})
 
 
-def renting_form(request):
-    # Grab the gadget from url
+def renting_form(request, slug):
+    print('about to proceed')
+    rentings = Renting.objects.get(id=request.user.id)
+    gadget = Gadget.objects.get(slug=slug)
+    print(gadget)
+    print(rentings)
+
+    if request.method == "POST":
+        renting_form = RentingForm(data=request.POST)
+        if renting_form.is_valid():
+            renting = renting_form.save(commit=False)
+            renting.customer = request.user
+            renting.gadget = gadget
+            renting.save()
+
     renting_form = RentingForm()
 
     return render(
         request,
         "shop/renting_form.html",
-        {"renting_form": renting_form},
+        {'renting_form': renting_form, 'rentings': rentings, 'gadget': gadget}
     )
