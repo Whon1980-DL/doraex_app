@@ -23,4 +23,8 @@ class CustomerAdmin(admin.ModelAdmin):
     list_filter = ('age',)
 
 
-admin.site.register(Renting)
+@admin.register(Renting)
+class RentingAdmin(admin.ModelAdmin):
+    list_display = ('id', 'customer', 'gadget', 'first_name', 'last_name', 'status')
+    search_fields = ['customer', 'gadget']
+    list_filter = ('status', 'created_on', 'customer')

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- index.html content starts here -->
+<!-- Header-->
+<header class="bg-info py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-secondary">
+            <h1 class="display-4 fw-bolder">Cart Page</h1>
+            <p class="lead fw-normal text-secondary-50 mb-0">{{ customer.customer }} has added the following gadget into cart. Pleas confirm detail then checkout of edit deatil.</p>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Gadget image and detail -->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for renting in cart %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h6><strong> Gadget to rent: </strong>{{ renting.gadget }}</h6>
+                                    <h6><strong> Number of day rent: </strong>{{ renting.Days_rent.days }}</h6>
+                                    <h6><strong> Quantity to rent: </strong>{{ renting.quantity }}</h6>
+                                    <h6><strong> Shipping Address: </strong> {{ renting.address }}</h6>
+                                    <h6><strong> Start date of rent: </strong> {{ renting.start_date }}</h6>
+                                    <h6><strong> End date of rent: </strong> {{ renting.end_date}}</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                        href="#">Edit</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:2 %}
+                </div>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo;PREV</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<!-- index.html content ends here -->
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
+from django.core.exceptions import ValidationError
 
 
 # Create your models here.
@@ -50,21 +51,32 @@ class Customer(models.Model):
         return f"{self.id} {self.first_name} {self.last_name}|age {self.age}"
 
 
-PAYMENT = ((0, "Unpaid"), (1, "Paid"))
+STATUS = ((0, "peding"), (1, "complete"))
 
 
 class Renting(models.Model):
+
+    def Date_validation(value):
+        if value < date.today():
+            raise ValidationError("The date cannot be in the past")
+        
     gadget = models.ForeignKey(Gadget, on_delete=models.CASCADE, related_name="renting_item")
+    quantity = models.IntegerField(default=1, blank=False)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="renter")
     first_name = models.CharField(max_length=50, blank=False, default="")
     last_name = models.CharField(max_length=50, blank=False, default="")
-    start_date = models.DateField(default=date.today, blank=False)
-    end_date = models.DateField(default=date.today, blank=False)
+    start_date = models.DateField(default=date.today, validators=[Date_validation])
+    end_date = models.DateField(default=date.today, validators=[Date_validation])
     address = models.CharField(max_length=300, default="", blank=False)
+    email = email = models.EmailField(default="", max_length=250)
     phone = models.CharField(max_length=30, default="", blank=True)
-    status = models.IntegerField(choices=PAYMENT, default=0)
+    status = models.IntegerField(choices=STATUS, default=0)
     created_on = models.DateField(default=date.today)
 
     def __str__(self):
-        return f"renting id:{self.id} {self.customer} rent {self.gadget} from {self.start_date} unitl {self.end_date}"
+        return f"renting id:{self.id} {self.customer} rent {self.quantity} {self.gadget} from {self.start_date} unitl {self.end_date}"
 
+    @property
+    def Days_rent(self):
+        days_rent = self.end_date - self.start_date
+        return days_rent

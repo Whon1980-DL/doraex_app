@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from datetime import date
 from .models import Gadget, Category, Customer, Renting
 from .forms import RentingForm
 
@@ -65,6 +66,8 @@ def renting_form(request, slug):
     print(customer_age)
     print(usage_age)
     print(customer)
+    today_date = date.today()
+    print(today_date)
 
     if request.method == "POST":
         renting_form = RentingForm(data=request.POST)
@@ -77,12 +80,30 @@ def renting_form(request, slug):
             renting.first_name = customer.shipping_address
             renting.email = customer.email
             renting.phone = customer.phone
+            renting.address = customer.shipping_address
             renting.save()
+
+            messages.add_message(request, messages.SUCCESS, "Gadget add to cart please review cart to check out or contitue shopping ")
 
     renting_form = RentingForm()
 
     return render(
         request,
         "shop/renting_form.html",
-        {'renting_form': renting_form, 'rentings': rentings, 'gadget': gadget, 'customer': customer}
+        {'renting_form': renting_form, 'rentings': rentings, 'gadget': gadget, 'customer': customer, 'today_date': today_date},
     )
+
+
+def cart(request):
+    customer = Customer.objects.get(id=request.user.id+2)
+    customer_username = customer.customer
+    renting_pending = Renting.objects.filter(status=0)
+    cart = renting_pending.filter(customer=customer_username)
+    gadget_count = cart.all().order_by('-created_on')
+    
+    return render(
+        request, 
+        'shop/cart.html', 
+        {'cart': cart, 'gadget_count': gadget_count, 'customer': customer},
+    )
+
