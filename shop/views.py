@@ -81,6 +81,7 @@ def renting_form(request, slug):
             renting.email = customer.email
             renting.phone = customer.phone
             renting.address = customer.shipping_address
+            renting.price = gadget.unit_rent_price
             renting.save()
 
             messages.add_message(request, messages.SUCCESS, "Gadget add to cart please review cart to check out or contitue shopping ")
@@ -106,4 +107,3 @@ def cart(request):
         'shop/cart.html', 
         {'cart': cart, 'gadget_count': gadget_count, 'customer': customer},
     )
-

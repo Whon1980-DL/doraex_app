@@ -62,11 +62,13 @@ class Renting(models.Model):
         
     gadget = models.ForeignKey(Gadget, on_delete=models.CASCADE, related_name="renting_item")
     quantity = models.IntegerField(default=1, blank=False)
+    price = models.IntegerField(default=0)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="renter")
     first_name = models.CharField(max_length=50, blank=False, default="")
     last_name = models.CharField(max_length=50, blank=False, default="")
     start_date = models.DateField(default=date.today, validators=[Date_validation])
     end_date = models.DateField(default=date.today, validators=[Date_validation])
+    number_days_rent = models.IntegerField(default=1, blank=False)
     address = models.CharField(max_length=300, default="", blank=False)
     email = email = models.EmailField(default="", max_length=250)
     phone = models.CharField(max_length=30, default="", blank=True)
@@ -77,6 +79,7 @@ class Renting(models.Model):
         return f"renting id:{self.id} {self.customer} rent {self.quantity} {self.gadget} from {self.start_date} unitl {self.end_date}"
 
     @property
-    def Days_rent(self):
-        days_rent = self.end_date - self.start_date
-        return days_rent
+    def Total_price(self):
+        total_price = self.price * self.quantity * self.number_days_rent
+        return total_price
+    

@@ -21,33 +21,35 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for renting in cart %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h6><strong> Gadget to rent: </strong>{{ renting.gadget }}</h6>
-                                    <h6><strong> Number of day rent: </strong>{{ renting.Days_rent.days }}</h6>
-                                    <h6><strong> Quantity to rent: </strong>{{ renting.quantity }}</h6>
-                                    <h6><strong> Shipping Address: </strong> {{ renting.address }}</h6>
-                                    <h6><strong> Start date of rent: </strong> {{ renting.start_date }}</h6>
-                                    <h6><strong> End date of rent: </strong> {{ renting.end_date}}</h6>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                        href="#">Edit</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    {% if forloop.counter|divisibleby:2 %}
-                </div>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% endif %}
-                    {% endfor %}
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Gadget</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Daily Rental Price</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">Number of Day Rent</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Shipping Address</th>
+                          </tr>
+                        </thead>
+                        {% for renting in cart %}
+                        <tbody>
+                          <tr>
+                            <td>{{ renting.gadget }}</td>
+                            <td>{{ renting.quantity }}</td>
+                            <td>{{ renting.price }}</td>
+                            <td>{{ renting.start_day }}</td>
+                            <td>{{ renting.number_days_rent }}</td>
+                            <td>{{ renting.Total_price }}</td>
+                            <td>{{ renting.email }}</td>
+                            <td>{{ renting.phone }}</td>
+                            <td>{{ renting.address }}</td>
+                          </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
         </section>
