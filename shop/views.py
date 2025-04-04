@@ -97,7 +97,7 @@ def cart(request):
     
     return render(
         request, 
-        'shop/cart.html', 
+        'shop/cart.html',
         {'cart': cart, 'gadget_count': gadget_count, 'customer': customer, 'rent_edit_form': rent_edit_form},
     )
 
