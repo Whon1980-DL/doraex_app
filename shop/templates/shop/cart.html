@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <!-- index.html content starts here -->
@@ -20,10 +20,11 @@
         <!-- Gadget image and detail -->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <table class="table">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 table-responsive">
+                    <table class="table col-4 text-center">
                         <thead class="thead-dark">
                           <tr>
+                            <th scope="col">Renting ID</th>
                             <th scope="col">Gadget</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Daily Rental Price</th>
@@ -40,21 +41,22 @@
                         </thead>
                         {% for renting in cart %}
                         <tbody>
-                          <tr>
-                            <td>{{ renting.gadget }}</td>
-                            <td>{{ renting.quantity }}</td>
-                            <td>{{ renting.price }}</td>
-                            <td>{{ renting.start_day }}</td>
-                            <td>{{ renting.number_days_rent }}</td>
-                            <td>{{ renting.Total_price }}</td>
-                            <td>{{ renting.email }}</td>
-                            <td>{{ renting.phone }}</td>
-                            <td>{{ renting.address }}</td>
-                            <td><button id="submitButton" type="submit"
+                          <tr id="renting{{ renting.id }}">
+                            <th scope="row">{{ renting.id }}</th>
+                            <td id="gadget{{renting.id}}">{{ renting.gadget }}</td>
+                            <td id="quantity{{renting.id}}">{{ renting.quantity }}</td>
+                            <td id="price{{renting.id}}">{{ renting.price }}</td>
+                            <td id="start_date{{renting.id}}">{{ renting.start_date }}</td>
+                            <td id="number_days_rent{{renting.id}}">{{ renting.number_days_rent }}</td>
+                            <td id="total_price{{renting.id}}">{{ renting.Total_price }}</td>
+                            <td id="email{{renting.id}}">{{ renting.email }}</td>
+                            <td id="phone{{renting.id}}">{{ renting.phone }}</td>
+                            <td id="address{{renting.id}}">{{ renting.address }}</td>
+                            <td><button id="deleteButton" type="submit" renting_id="{{ renting.id }}"
                                 class="btn btn-danger btn-sm">delete</button></td>
-                            <td><button id="submitButton" type="submit"
-                                class="btn btn-info btn-sm">edit</button></td>
-                            <td><button id="submitButton" type="submit"
+                            <td><button id="editButton" type="submit" renting_id="{{ renting.id }}"
+                                class="btn btn-info btn-edit btn-sm">edit</button></td>
+                            <td><button id="confirmButton" type="submit" renting_id="{{ renting.id }}"
                                 class="btn btn-success btn-sm">Confirm</button></td>
                           </tr>
                         {% endfor %}
@@ -62,8 +64,17 @@
                 </div>
             </div>
         </section>
+        <form id="rentEditFrom" method="post" style="margin-top: 1.3em;">
+            {{ rent_edit_form | crispy }}
+            {% csrf_token %}
+            <button id="submitButton" type="submit" class="btn btn-info btn-lg">Submit</button>
+        </form>
     </div>
 </div>
 
 <!-- index.html content ends here -->
+{% endblock %}
+
+{% block extras %}
+<script src="{% static 'js/rent_edit.js' %}"></script>
 {% endblock %}

@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from datetime import date
+from django.http import HttpResponseRedirect
 from .models import Gadget, Category, Customer, Renting
-from .forms import RentingForm
+from .forms import RentingForm, RentEditForm
 
 
 # Create your views here.
@@ -53,21 +54,12 @@ def customer_profile(request):
 
 
 def renting_form(request, slug):
-    print('about to proceed')
+    print(request.user.id)
     gadget = Gadget.objects.get(slug=slug)
-    print(gadget)
     id = request.user.id+10
-    print(id)
     rentings = Renting.objects.get(id=id)
-    print(rentings)
     customer = Customer.objects.get(id=request.user.id+2)
-    customer_age = customer.age
-    usage_age = gadget.minimum_usage_age
-    print(customer_age)
-    print(usage_age)
-    print(customer)
     today_date = date.today()
-    print(today_date)
 
     if request.method == "POST":
         renting_form = RentingForm(data=request.POST)
@@ -77,7 +69,6 @@ def renting_form(request, slug):
             renting.gadget = gadget
             renting.first_name = customer.first_name
             renting.last_name = customer.last_name
-            renting.first_name = customer.shipping_address
             renting.email = customer.email
             renting.phone = customer.phone
             renting.address = customer.shipping_address
@@ -101,9 +92,31 @@ def cart(request):
     renting_pending = Renting.objects.filter(status=0)
     cart = renting_pending.filter(customer=customer_username)
     gadget_count = cart.all().order_by('-created_on')
+    rent_edit_form = RentEditForm()
+    print(request)
     
     return render(
         request, 
         'shop/cart.html', 
-        {'cart': cart, 'gadget_count': gadget_count, 'customer': customer},
+        {'cart': cart, 'gadget_count': gadget_count, 'customer': customer, 'rent_edit_form': rent_edit_form},
     )
+
+
+def renting_edit_form(request, renting_id):
+
+    if request.method == "POST":
+        
+        queryset = Renting.objects.filter(status=0)
+        renting = get_object_or_404(queryset, pk=renting_id)
+        rent_edit_form = RentEditForm(data=request.POST, instance=renting)
+        
+        if rent_edit_form.is_valid():
+            renting = rent_edit_form.save(commit=False)
+            renting.save()
+            messages.add_message(request, messages.SUCCESS, 'Renting Updated!')
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updating Renting!')
+
+    return HttpResponseRedirect(reverse('cart', args=[]))
+
+

@@ -15,10 +15,10 @@
                     <h3>
                         Great choice! You have selected to rent {{ gadget.gadget_name }}, please fill in the form to proceed.
                     </h3>
-                <form id="commentForm" method="post" style="margin-top: 1.3em;">
+                <form id="rentingFrom" method="post" style="margin-top: 1.3em;">
                     {{ renting_form | crispy }}
                     {% csrf_token %}
-                    <button id="submitButton" type="submit" class="btn btn-info btn-lg">Add to cart</button>
+                    <button id="addToCart" type="submit" class="btn btn-info btn-lg">Add to cart</button>
                 </form>
                 {% if renting_form.start_date.value == today_date or renting_form.end_date.value == today_date%}
                 <dive>Date can not be in the past</dive>
