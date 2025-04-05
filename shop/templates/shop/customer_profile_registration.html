@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="col-md-4 card mb-4 mt-3">
+            <div class="card-body">
+                <h3>
+                    Great choice! You have selected to rent <span class="text-info">{{ gadget.gadget_name}}
+                    </span>, please fill in the form to proceed.
+                </h3>
+                <form method="post">
+                    {{ customer_profile_registration_form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info btn-lg">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+{% endblock %}
+

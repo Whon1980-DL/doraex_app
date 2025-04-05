@@ -1,4 +1,4 @@
-from .models import Renting
+from .models import Renting, Customer
 from django import forms
 
 
@@ -32,3 +32,8 @@ class RentConfirmForm(forms.ModelForm):
         model = Renting
         fields = ('status',)
 
+
+class CustomerProfileRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ('first_name', 'last_name', 'age', 'phone', 'email', 'shipping_address',)

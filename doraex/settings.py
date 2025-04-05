@@ -28,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'django-insecure-)d0shh5v$t4-meo)mp2hgimz^xh1zoe$==f!)za$o18layg!h('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1', '.herokuapp.com'
@@ -59,6 +59,9 @@ LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+DATE_INPUT_FORMATS = ["%Y-%m-%d"]
+USE_L10N = False
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

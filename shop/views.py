@@ -5,7 +5,7 @@ from django.contrib import messages
 from datetime import date, timedelta
 from django.http import HttpResponseRedirect
 from .models import Gadget, Category, Customer, Renting
-from .forms import RentingForm, RentEditForm, RentConfirmForm
+from .forms import RentingForm, RentEditForm, RentConfirmForm, CustomerProfileRegistrationForm
 
 
 # Create your views here.
@@ -57,8 +57,6 @@ def customer_profile(request):
 def renting_form(request, slug):
     print(request.user.id)
     gadget = Gadget.objects.get(slug=slug)
-    id = request.user.id+10
-    rentings = Renting.objects.get(id=id)
     customer = Customer.objects.get(id=request.user.id+2)
     today_date = date.today()
 
@@ -85,7 +83,7 @@ def renting_form(request, slug):
     return render(
         request,
         "shop/renting_form.html",
-        {'renting_form': renting_form, 'rentings': rentings, 'gadget': gadget, 'customer': customer, 'today_date': today_date},
+        {'renting_form': renting_form, 'gadget': gadget, 'customer': customer, 'today_date': today_date},
     )
 
 
@@ -94,14 +92,17 @@ def cart(request):
     customer_username = customer.customer
     renting_pending = Renting.objects.filter(status=0)
     cart = renting_pending.filter(customer=customer_username)
-    gadget_count = cart.all().order_by('-created_on')
+    cart_list = cart.all().order_by('-created_on')
+    gadget_count = cart.all().count()
+    print('about to count')
+    print(gadget_count)
     rent_edit_form = RentEditForm()
     print(request)
     
     return render(
         request, 
         'shop/cart.html',
-        {'cart': cart, 'gadget_count': gadget_count, 'customer': customer, 'rent_edit_form': rent_edit_form},
+        {'cart_list': cart_list, 'gadget_count': gadget_count, 'customer': customer, 'rent_edit_form': rent_edit_form},
     )
 
 
@@ -149,3 +150,23 @@ def renting_delete(request, renting_id):
     messages.add_message(request, messages.SUCCESS, 'Renting deleted!')
 
     return HttpResponseRedirect(reverse('cart', args=[]))
+
+
+def customer_profile_registration(request):
+
+    username = request.user
+
+    if request.method == "POST":
+        customer_profile_registration_form = CustomerProfileRegistrationForm(data=request.POST)
+        if customer_profile_registration_form.is_valid():
+            customer = customer_profile_registration_form.save(commit=False)
+            customer.customer = username
+            customer_profile_registration_form.save()
+            messages.add_message(request, messages.SUCCESS, "Thank you ")
+
+    customer_profile_registration_form = CustomerProfileRegistrationForm()
+
+    return render(
+        request, "shop/customer_profile_registration.html",
+        {"customer_profile_registration_form": customer_profile_registration_form},
+    )

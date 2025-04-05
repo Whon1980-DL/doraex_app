@@ -7,6 +7,7 @@ const rentingPhoneText = document.getElementById("id_phone");
 const rentingAddressText = document.getElementById("id_address");
 const rentEditForm = document.getElementById("rentEditForm");
 const submitButton = document.getElementById("submitButton");
+const rentingIdText = document.getElementById("rentingIdValue");
 
 const confirmModal = new bootstrap.Modal(document.getElementById("confirmModal"));
 const confirmButtons = document.getElementsByClassName('btn-confirm')
@@ -30,6 +31,8 @@ for (let button of editButtons) {
   button.addEventListener("click", (e) => {
     let rentingId = e.target.getAttribute("renting_id");
     rentEditForm.classList.remove("d-none");
+    let rentingIdContent = rentingId;
+    rentingIdText.innerHTML = rentingIdContent; 
     let rentingQuantityContent = document.getElementById(`quantity${rentingId}`).innerText;
     rentingQuantityText.value = rentingQuantityContent;
     let rentingStartDateContent = document.getElementById(`start_date${rentingId}`).innerText;
