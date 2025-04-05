@@ -135,7 +135,7 @@ def renting_confirm(request, renting_id):
     print(renting.status)
     messages.add_message(
         request, messages.SUCCESS, 
-        'Your rent is confirmed and your daget are on their way. Please pay upon delivery'
+        'Your rent is confirmed and your gadget are on their way. Please pay upon delivery'
         )
     
     return HttpResponseRedirect(reverse('cart', args=[]))
