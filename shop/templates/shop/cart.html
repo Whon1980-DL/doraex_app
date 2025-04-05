@@ -9,66 +9,73 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-secondary">
             <h1 class="display-4 fw-bolder">Cart Page</h1>
-            <p class="lead fw-normal text-secondary-50 mb-0">{{ customer.customer }} has added the following gadget into cart. Pleas confirm detail then checkout of edit deatil.</p>
+            <p class="lead fw-normal text-secondary-50 mb-0">{{ customer.customer }} has added the following gadget into
+                cart. Pleas confirm detail then checkout of edit deatil.</p>
         </div>
     </div>
 </header>
 
 <div class="container-fluid">
     <div class="row">
-
         <!-- Gadget image and detail -->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 table-responsive">
                     <table class="table col-4 text-center">
                         <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">Renting ID</th>
-                            <th scope="col">Gadget</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Daily Rental Price</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">Number of Day Rent</th>
-                            <th scope="col">Total Price</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Shipping Address</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                          </tr>
+                            <tr>
+                                <th scope="col">Renting ID</th>
+                                <th scope="col">Gadget</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Daily Rental Price</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">Number of Day Rent</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Shipping Address</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
                         </thead>
                         {% for renting in cart %}
                         <tbody>
-                          <tr id="renting{{ renting.id }}">
-                            <th scope="row">{{ renting.id }}</th>
-                            <td id="gadget{{renting.id}}">{{ renting.gadget }}</td>
-                            <td id="quantity{{renting.id}}">{{ renting.quantity }}</td>
-                            <td id="price{{renting.id}}">{{ renting.price }}</td>
-                            <td id="start_date{{renting.id}}">{{ renting.start_date }}</td>
-                            <td id="number_days_rent{{renting.id}}">{{ renting.number_days_rent }}</td>
-                            <td id="total_price{{renting.id}}">{{ renting.Total_price }}</td>
-                            <td id="email{{renting.id}}">{{ renting.email }}</td>
-                            <td id="phone{{renting.id}}">{{ renting.phone }}</td>
-                            <td id="address{{renting.id}}">{{ renting.address }}</td>
-                            <td><button id="deleteButton" type="submit" renting_id="{{ renting.id }}"
-                                class="btn btn-danger btn-sm">delete</button></td>
-                            <td><button id="editButton" type="submit" renting_id="{{ renting.id }}"
-                                class="btn btn-info btn-edit btn-sm">edit</button></td>
-                            <td><button id="confirmButton" type="submit" renting_id="{{ renting.id }}"
-                                class="btn btn-success btn-sm">Confirm</button></td>
-                          </tr>
-                        {% endfor %}
+                            <tr id="renting{{ renting.id }}">
+                                <th scope="row">{{ renting.id }}</th>
+                                <td id="gadget{{renting.id}}">{{ renting.gadget }}</td>
+                                <td id="quantity{{renting.id}}">{{ renting.quantity }}</td>
+                                <td id="price{{renting.id}}">{{ renting.price }}</td>
+                                <td id="start_date{{renting.id}}">{{ renting.start_date }}</td>
+                                <td id="number_days_rent{{renting.id}}">{{ renting.number_days_rent }}</td>
+                                <td id="total_price{{renting.id}}">{{ renting.Total_price }}</td>
+                                <td id="email{{renting.id}}">{{ renting.email }}</td>
+                                <td id="phone{{renting.id}}">{{ renting.phone }}</td>
+                                <td id="address{{renting.id}}">{{ renting.address }}</td>
+                                <td><button id="deleteButton" type="submit" renting_id="{{ renting.id }}"
+                                        class="btn btn-danger btn-sm">delete</button></td>
+                                <td><button id="editButton" type="submit" renting_id="{{ renting.id }}"
+                                        class="btn btn-info btn-edit btn-sm">edit</button></td>
+                                <td><button id="confirmButton" type="submit" renting_id="{{ renting.id }}"
+                                        class="btn btn-success btn-sm">Confirm</button></td>
+                            </tr>
+                            {% endfor %}
                     </table>
                 </div>
             </div>
         </section>
-        <form id="rentEditFrom" method="post" style="margin-top: 1.3em;">
-            {{ rent_edit_form | crispy }}
-            {% csrf_token %}
-            <button id="submitButton" type="submit" class="btn btn-info btn-lg">Submit</button>
-        </form>
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <!-- Creating Renting Form -->
+                    <form class="d-none" id="rentEditForm" method="post" style="margin-top: 1.3em;">
+                        {{ rent_edit_form | crispy }}
+                        {% csrf_token %}
+                        <button id="submitButton" type="submit" class="btn btn-info btn-lg">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 

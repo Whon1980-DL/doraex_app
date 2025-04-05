@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from datetime import date
+from datetime import date, timedelta
 from django.http import HttpResponseRedirect
 from .models import Gadget, Category, Customer, Renting
 from .forms import RentingForm, RentEditForm
@@ -73,6 +73,9 @@ def renting_form(request, slug):
             renting.phone = customer.phone
             renting.address = customer.shipping_address
             renting.price = gadget.unit_rent_price
+            end_date = renting.start_date + timedelta(days=renting.number_days_rent)
+            renting.end_date = end_date
+
             renting.save()
 
             messages.add_message(request, messages.SUCCESS, "Gadget add to cart please review cart to check out or contitue shopping ")

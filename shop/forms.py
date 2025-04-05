@@ -22,4 +22,6 @@ class RentEditForm(forms.ModelForm):
         model = Renting
         fields = ('quantity', 'start_date', 'number_days_rent', 'email', 'phone', 'address',)
 
-        
+        widgets = {
+            'start_date': DatePickerInput(),
+        }

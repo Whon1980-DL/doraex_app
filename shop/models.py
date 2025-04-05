@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import date
+from datetime import date, timedelta
 from django.core.exceptions import ValidationError
 
 
@@ -61,14 +61,14 @@ class Renting(models.Model):
             raise ValidationError("The date cannot be in the past")
         
     gadget = models.ForeignKey(Gadget, on_delete=models.CASCADE, related_name="renting_item")
-    quantity = models.IntegerField(default=1, blank=False)
+    quantity = models.IntegerField(default="", blank=False)
     price = models.IntegerField(default=0)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="renter")
     first_name = models.CharField(max_length=50, blank=False, default="")
     last_name = models.CharField(max_length=50, blank=False, default="")
     start_date = models.DateField(default=date.today, validators=[Date_validation])
     end_date = models.DateField(default=date.today, validators=[Date_validation])
-    number_days_rent = models.IntegerField(default=1, blank=False)
+    number_days_rent = models.IntegerField(default="", blank=False)
     address = models.CharField(max_length=300, default="", blank=False)
     email = email = models.EmailField(default="", max_length=250)
     phone = models.CharField(max_length=30, default="", blank=True)
@@ -82,4 +82,5 @@ class Renting(models.Model):
     def Total_price(self):
         total_price = self.price * self.quantity * self.number_days_rent
         return total_price
+    
     

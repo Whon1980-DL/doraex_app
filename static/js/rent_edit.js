@@ -21,6 +21,7 @@ const submitButton = document.getElementById("submitButton");
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {
     let rentingId = e.target.getAttribute("renting_id");
+    rentEditForm.classList.remove("d-none");
     let rentingQuantityContent = document.getElementById(`quantity${rentingId}`).innerText;
     rentingQuantityText.value = rentingQuantityContent;
     let rentingStartDateContent = document.getElementById(`start_date${rentingId}`).innerText;
@@ -34,6 +35,6 @@ for (let button of editButtons) {
     let rentingAddressContent = document.getElementById(`address${rentingId}`).innerText;
     rentingAddressText.value = rentingAddressContent;
     submitButton.innerText = "Update";
-    rentEditFrom.setAttribute("action", `edit_renting/${rentingId}`);
+    rentEditForm.setAttribute("action", `edit_renting/${rentingId}`);
   });
 }
