@@ -47,5 +47,6 @@ for (let button of confirmButtons) {
   button.addEventListener("click", (e) => {
   let rentingId = e.target.getAttribute("renting_id");
   rentConfirm.href = `confirm_renting/${rentingId}`;
+  confirmModal.show();
   });
 }
