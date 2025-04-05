@@ -7,6 +7,8 @@ const rentingPhoneText = document.getElementById("id_phone");
 const rentingAddressText = document.getElementById("id_address");
 const rentEditForm = document.getElementById("rentEditForm");
 const submitButton = document.getElementById("submitButton");
+const confirmButton = document.getElementsByClassName('btn-confirm')
+const rentConfirmForm = document.getElementById("rentConfirmForm")
 
 /**
 * Initializes edit functionality for the provided edit buttons.
@@ -21,6 +23,7 @@ const submitButton = document.getElementById("submitButton");
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {
     let rentingId = e.target.getAttribute("renting_id");
+    rentEditForm.classList.remove("d-none");
     let rentingQuantityContent = document.getElementById(`quantity${rentingId}`).innerText;
     rentingQuantityText.value = rentingQuantityContent;
     let rentingStartDateContent = document.getElementById(`start_date${rentingId}`).innerText;
@@ -34,6 +37,12 @@ for (let button of editButtons) {
     let rentingAddressContent = document.getElementById(`address${rentingId}`).innerText;
     rentingAddressText.value = rentingAddressContent;
     submitButton.innerText = "Update";
-    rentEditFrom.setAttribute("action", `edit_renting/${rentingId}`);
+    rentEditForm.setAttribute("action", `edit_renting/${rentingId}`);
+  });
+}
+
+for (let button of confirmButtonButtons) {
+  button.addEventListener("click", (e) => {
+  rentConfirmForm.setAttribute("action", `confirm_renting/${rentingId}`);
   });
 }

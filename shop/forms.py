@@ -25,3 +25,10 @@ class RentEditForm(forms.ModelForm):
         widgets = {
             'start_date': DatePickerInput(),
         }
+
+
+class RentConfirmForm(forms.ModelForm):
+    class Meta:
+        model = Renting
+        fields = ('status',)
+

@@ -5,7 +5,7 @@ from django.contrib import messages
 from datetime import date, timedelta
 from django.http import HttpResponseRedirect
 from .models import Gadget, Category, Customer, Renting
-from .forms import RentingForm, RentEditForm
+from .forms import RentingForm, RentEditForm, RentConfirmForm
 
 
 # Create your views here.
@@ -75,7 +75,6 @@ def renting_form(request, slug):
             renting.price = gadget.unit_rent_price
             end_date = renting.start_date + timedelta(days=renting.number_days_rent)
             renting.end_date = end_date
-
             renting.save()
 
             messages.add_message(request, messages.SUCCESS, "Gadget add to cart please review cart to check out or contitue shopping ")
@@ -115,6 +114,8 @@ def renting_edit_form(request, renting_id):
         
         if rent_edit_form.is_valid():
             renting = rent_edit_form.save(commit=False)
+            end_date = renting.start_date + timedelta(days=renting.number_days_rent)
+            renting.end_date = end_date
             renting.save()
             messages.add_message(request, messages.SUCCESS, 'Renting Updated!')
         else:
@@ -123,3 +124,18 @@ def renting_edit_form(request, renting_id):
     return HttpResponseRedirect(reverse('cart', args=[]))
 
 
+def renting_confirm(request, renting_id):
+    print('about to post')
+
+    print('about to action')
+    queryset = Renting.objects.filter(status=0)
+    renting = get_object_or_404(queryset, pk=renting_id)
+    renting.status = 1
+    renting.save()
+    print(renting.status)
+    messages.add_message(
+        request, messages.SUCCESS, 
+        'Your rent is confirmed and your daget are on their way. Please pay upon delivery'
+        )
+    
+    return HttpResponseRedirect(reverse('cart', args=[]))

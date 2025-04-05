@@ -15,20 +15,23 @@
     <meta name="author" content="" />
     <title>DoraEx</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static '/images/logo.png' %}" />
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="{% static 'css/custom_styles.css' %}" rel="stylesheet" />
+    
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="{% url 'home' %}">DoraEx</a>
+            <a class="navbar-brand" href="{% url 'home' %}"><span>D</span><span><img class="logo" src="{% static '/images/logo.png' %}" alt="bell"/></span><span>raEx</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
