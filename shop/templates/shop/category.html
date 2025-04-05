@@ -4,8 +4,8 @@
 {% block content %}
 
 <!-- index.html content starts here -->
- <!-- Header-->
- <header class="bg-info py-5">
+<!-- Header-->
+<header class="bg-info py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-secondary">
             <h1 class="display-4 fw-bolder">{{ category }} </h1>
@@ -39,7 +39,8 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'gadget_view' gadget.slug %}">View</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                        href="{% url 'gadget_view' gadget.slug %}">View</a></div>
                             </div>
                         </div>
                     </div>
