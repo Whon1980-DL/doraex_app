@@ -7,8 +7,10 @@ const rentingPhoneText = document.getElementById("id_phone");
 const rentingAddressText = document.getElementById("id_address");
 const rentEditForm = document.getElementById("rentEditForm");
 const submitButton = document.getElementById("submitButton");
-const confirmButton = document.getElementsByClassName('btn-confirm')
-const rentConfirmForm = document.getElementById("rentConfirmForm")
+
+const confirmModal = new bootstrap.Modal(document.getElementById("confirmModal"));
+const confirmButtons = document.getElementsByClassName('btn-confirm')
+const rentConfirm = document.getElementById("rentConfirm");
 
 /**
 * Initializes edit functionality for the provided edit buttons.
@@ -41,8 +43,10 @@ for (let button of editButtons) {
   });
 }
 
-for (let button of confirmButtonButtons) {
+for (let button of confirmButtons) {
   button.addEventListener("click", (e) => {
-  rentConfirmForm.setAttribute("action", `confirm_renting/${rentingId}`);
+  let rentingId = e.target.getAttribute("renting_id");
+  rentConfirm.href = `confirm_renting/${rentingId}`;
+  confirmModal.show();
   });
 }
