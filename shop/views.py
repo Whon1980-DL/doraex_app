@@ -15,6 +15,7 @@ class GadgetList(generic.ListView):
     paginate_by = 4
 
 
+
 def category(request, dl):
     # Grab the category from the url
     category = Category.objects.get(category_name=dl)
@@ -125,17 +126,26 @@ def renting_edit_form(request, renting_id):
 
 
 def renting_confirm(request, renting_id):
-    print('about to post')
 
-    print('about to action')
     queryset = Renting.objects.filter(status=0)
     renting = get_object_or_404(queryset, pk=renting_id)
     renting.status = 1
     renting.save()
-    print(renting.status)
     messages.add_message(
         request, messages.SUCCESS, 
         'Your rent is confirmed and your gadget are on their way. Please pay upon delivery'
         )
     
+    return HttpResponseRedirect(reverse('cart', args=[]))
+
+
+def renting_delete(request, renting_id):
+    """
+    view to delete renting
+    """
+    queryset = Renting.objects.filter(status=0)
+    renting = get_object_or_404(queryset, pk=renting_id)
+    renting.delete()
+    messages.add_message(request, messages.SUCCESS, 'Renting deleted!')
+
     return HttpResponseRedirect(reverse('cart', args=[]))

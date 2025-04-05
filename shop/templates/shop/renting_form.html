@@ -7,15 +7,16 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <!-- Creating Renting Form -->
-            {% if customer.age < gadget.minimum_usage_age %} 
-            <div>Sorry! You are too young please return to homepage.</div>
-            {% else %}
-            <div class="col-md-4 card mb-4 mt-3">
-                <div class="card-body">
-                    <h3>
-                        Great choice! You have selected to rent {{ gadget.gadget_name }}, please fill in the form to proceed.
-                    </h3>
-                <form id="rentingFrom" method="post" style="margin-top: 1.3em;">
+            {% if customer.age < gadget.minimum_usage_age %} <div>Sorry! You are too young please return to homepage.
+        </div>
+        {% else %}
+        <div class="col-md-4 card mb-4 mt-3">
+            <div class="card-body">
+                <h3>
+                    Great choice! You have selected to rent <span class="text-info">{{ gadget.gadget_name}}
+                    </span>, please fill in the form to proceed.
+                </h3>
+                <form id="rentingForm" method="post" style="margin-top: 1.3em;">
                     {{ renting_form | crispy }}
                     {% csrf_token %}
                     <button id="addToCart" type="submit" class="btn btn-info btn-lg">Add to cart</button>
@@ -23,11 +24,33 @@
                 {% if renting_form.start_date.value == today_date or renting_form.end_date.value == today_date%}
                 <dive>Date can not be in the past</dive>
                 {% endif %}
-                </div>
             </div>
-        {% endif %}
         </div>
+        {% endif %}
+    </div>
     </div>
 </section>
+<div class="modal fade" id="continueModal" tabindex="-1" aria-labelledby="continueModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="continueModalLabel">Rent added to cart!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Thank you for chossing our gadget.
+                Please view your cart and confirm to checkout or go back to home page to continue your shopping.
+            </div>
+            <div class="modal-footer">
+                <a id="rentConfirm" href="{% url 'home' %}" class="btn btn-warning">Home</a>
+                <a id="rentConfirm" href="{% url 'cart' %}" class="btn btn-info">Go to cart</a>
+            </div>
+        </div>
+    </div>
+</div>
 
+{% endblock %}
+
+{% block extras %}
+<script src="{% static 'js/renting_form.js' %}"></script>
 {% endblock %}

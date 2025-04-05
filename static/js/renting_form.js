@@ -1,9 +1,16 @@
-/*!
-* Start Bootstrap - Shop Homepage v5.0.6 (https://startbootstrap.com/template/shop-homepage)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
+const addToCartButton = document.getElementById("addToCart");
+const continueModal = new bootstrap.Modal(document.getElementById("continueModal"));
+/**
+* Initializes edit functionality for the provided edit buttons.
+* 
+* For each button in the `editButtons` collection:
+* - Retrieves the associated comment's ID upon click.
+* - Fetches the content of the corresponding comment.
+* - Populates the `commentText` input/textarea with the comment's content for editing.
+* - Updates the submit button's text to "Update".
+* - Sets the form's action attribute to the `edit_comment/{commentId}` endpoint.
 */
-// This file is intentionally blank
-// Use this file to add JavaScript to your project
 
-const submitButton = document.getElementById("submitButton")
+/** addToCartButton.addEventListener("click", (e) => {
+/** continueModal.show();
+/** });
