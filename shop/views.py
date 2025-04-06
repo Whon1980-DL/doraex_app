@@ -38,32 +38,56 @@ def gadget_view(request, slug):
 
     queryset = Gadget.objects.filter(status=1)
     gadget = get_object_or_404(queryset, slug=slug)
+    customer = request.user
 
     return render(
         request,
         "shop/gadget_view.html",
-        {"gadget": gadget},
+        {"gadget": gadget, "customer": customer},
+    )
+
+
+def customer_profile_registration(request):
+
+    if request.method == "POST":
+        customer_profile_registration_form = CustomerProfileRegistrationForm(data=request.POST)
+        if customer_profile_registration_form.is_valid():
+            customer_profile_registration_form.save()
+            messages.add_message(request, messages.SUCCESS, "Thank you for creating your customer profile. Please head back to our Home to start your renting ")
+
+    customer_profile_registration_form = CustomerProfileRegistrationForm()
+
+    return render(
+        request, "shop/customer_profile_registration.html",
+        {"customer_profile_registration_form": customer_profile_registration_form},
     )
 
 
 def customer_profile(request):
-    customer = Customer.objects.get(id=request.user.id+2)
-    profile_edit_form = ProfileEditForm()
-    print(customer)
-    print(customer.age)
-    return render(request, 'shop/customer_profile.html', {'customer': customer, 'profile_edit_form': profile_edit_form})
+
+    customer = Customer.objects.all()
+    username = request.user
+
+    if customer.filter(customer=username).exists(): 
+        print("Entry contained in queryset")
+        customer = Customer.objects.get(customer=request.user)
+        profile_edit_form = ProfileEditForm()
+        return render(request, 'shop/customer_profile.html', {'customer': customer, 'profile_edit_form': profile_edit_form})
+    else:
+        messages.add_message(request, messages.ERROR, 'Error viewing Profile please go to Profile registration link above to create one!')
+
+        return render(request, 'shop/no_customer_profile_page.html')
 
 
-def profile_edit_form(request, customer_id):
+def profile_edit_form(request):
 
     if request.method == "POST":
         
-        customer = Customer.objects.get(id=customer_id)
+        customer = request.user
         profile_edit_form = ProfileEditForm(data=request.POST, instance=customer)
         
         if profile_edit_form.is_valid():
             profile = profile_edit_form.save(commit=False)
-            customer.customer = request.user
             profile.save()
             messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
         else:
@@ -75,47 +99,51 @@ def profile_edit_form(request, customer_id):
 def renting_form(request, slug):
     print(request.user.id)
     gadget = Gadget.objects.get(slug=slug)
-    customer = Customer.objects.get(id=request.user.id+2)
     today_date = date.today()
+    customer = Customer.objects.all()
+    username = request.user
 
-    if request.method == "POST":
-        renting_form = RentingForm(data=request.POST)
-        if renting_form.is_valid():
-            renting = renting_form.save(commit=False)
-            renting.customer = request.user
-            renting.gadget = gadget
-            renting.first_name = customer.first_name
-            renting.last_name = customer.last_name
-            renting.email = customer.email
-            renting.phone = customer.phone
-            renting.address = customer.shipping_address
-            renting.price = gadget.unit_rent_price
-            end_date = renting.start_date + timedelta(days=renting.number_days_rent)
-            renting.end_date = end_date
-            renting.save()
+    if customer.filter(customer=username).exists(): 
+        customer = Customer.objects.get(customer=request.user)
 
-            messages.add_message(request, messages.SUCCESS, "Gadget add to cart please review cart to check out or contitue shopping ")
+        if request.method == "POST":
+            renting_form = RentingForm(data=request.POST)
+            if renting_form.is_valid():
+                renting = renting_form.save(commit=False)
+                renting.customer = request.user
+                renting.gadget = gadget
+                renting.first_name = customer.first_name
+                renting.last_name = customer.last_name
+                renting.email = customer.email
+                renting.phone = customer.phone
+                renting.address = customer.shipping_address
+                renting.price = gadget.unit_rent_price
+                end_date = renting.start_date + timedelta(days=renting.number_days_rent)
+                renting.end_date = end_date
+                renting.save()
 
-    renting_form = RentingForm()
+                messages.add_message(request, messages.SUCCESS, "Gadget add to cart please review cart to check out or contitue shopping ")
 
-    return render(
-        request,
-        "shop/renting_form.html",
-        {'renting_form': renting_form, 'gadget': gadget, 'customer': customer, 'today_date': today_date},
-    )
+        renting_form = RentingForm()
+
+        return render(
+            request,
+            "shop/renting_form.html",
+            {'renting_form': renting_form, 'gadget': gadget, 'customer': customer, 'today_date': today_date},
+        )
+    else:
+        messages.add_message(request, messages.ERROR, 'Error renting the gadget please go to Profile registration link above to create one before proceed!')
+
+        return render(request, 'shop/no_customer_profile_page.html')
 
 
 def cart(request):
-    customer = Customer.objects.get(id=request.user.id+2)
-    customer_username = customer.customer
+    customer = request.user
     renting_pending = Renting.objects.filter(status=0)
-    cart = renting_pending.filter(customer=customer_username)
+    cart = renting_pending.filter(customer=customer)
     cart_list = cart.all().order_by('-created_on')
     gadget_count = cart.all().count()
-    print('about to count')
-    print(gadget_count)
     rent_edit_form = RentEditForm()
-    print(request)
     
     return render(
         request, 
@@ -170,23 +198,5 @@ def renting_delete(request, renting_id):
     return HttpResponseRedirect(reverse('cart', args=[]))
 
 
-def customer_profile_registration(request):
-
-    username = request.user
-
-    if request.method == "POST":
-        customer_profile_registration_form = CustomerProfileRegistrationForm(data=request.POST)
-        if customer_profile_registration_form.is_valid():
-            customer = customer_profile_registration_form.save(commit=False)
-            customer.customer = username
-            customer_profile_registration_form.save()
-            messages.add_message(request, messages.SUCCESS, "Thank you ")
-
-    customer_profile_registration_form = CustomerProfileRegistrationForm()
-
-    return render(
-        request, "shop/customer_profile_registration.html",
-        {"customer_profile_registration_form": customer_profile_registration_form},
-    )
 
 

@@ -42,6 +42,7 @@
                         {% if gadget_count == 0 %}
                         <p>You have no pending rent.</p>
                         {% else %}
+                        <p>You have {{ gadget_count }} rent pending to confirm for shipping</p>
                         {% for renting in cart_list %}
                         <tbody>
                             <tr id="renting{{ renting.id }}">

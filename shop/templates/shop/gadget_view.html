@@ -21,12 +21,12 @@
                     <a href="{% url 'renting_form' gadget.slug %}">
                     <button class="btn flex-shrink-0 btn-info" type="button">
                         <i class="bi-cart-fill me-1"></i>
-                        Rent
+                        Rent 
                     </button></a>
                     {% else %}
                     <a href="{% url 'account_login' %}">
-                        <button class="btn flex-shrink-0 btn-info" type="button">
-                            Log in to rent
+                        <button class="btn flex-shrink-0 btn-danger" type="button">
+                            Log in and create customer profile to rent
                         </button></a>
                     {% endif %}
                 </div>

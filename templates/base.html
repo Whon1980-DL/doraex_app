@@ -40,7 +40,8 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link {% if request.path == home_url %}active{%endif%}"
                             aria-current="page" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                            aria-current="page" href="#!">About</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Category</a>
@@ -64,7 +65,10 @@
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
                             href="{% url 'account_logout' %}">Logout</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'customer_profile_registration' %}">Profile Registration</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == customer_profile_registration_url %}active{% endif %}"
+                        aria-current="registration page" href="{% url 'customer_profile_registration' %}">Profile Registration</a>
+                    </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
@@ -84,7 +88,8 @@
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                     </button>
                 </a>
-                <a class="navbar-brand" href="{% url 'customer_profile' %}"><img class="profile" src="{% static '/images/profile.png' %}" alt="nobita"></a>
+                <a class="navbar-brand" href="{% url 'customer_profile' %}"><img class="profile"
+                        src="{% static '/images/profile.png' %}" alt="nobita"></a>
                 {% endif %}
             </div>
         </div>
