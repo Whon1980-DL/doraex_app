@@ -5,7 +5,7 @@ from django.contrib import messages
 from datetime import date, timedelta
 from django.http import HttpResponseRedirect
 from .models import Gadget, Category, Customer, Renting
-from .forms import RentingForm, RentEditForm, RentConfirmForm, CustomerProfileRegistrationForm
+from .forms import RentingForm, RentEditForm, RentConfirmForm, CustomerProfileRegistrationForm, ProfileEditForm
 
 
 # Create your views here.
@@ -13,7 +13,6 @@ class GadgetList(generic.ListView):
     queryset = Gadget.objects.filter(status=1)
     template_name = "shop/index.html"
     paginate_by = 4
-
 
 
 def category(request, dl):
@@ -49,9 +48,28 @@ def gadget_view(request, slug):
 
 def customer_profile(request):
     customer = Customer.objects.get(id=request.user.id+2)
+    profile_edit_form = ProfileEditForm()
     print(customer)
     print(customer.age)
-    return render(request, 'shop/customer_profile.html', {'customer': customer})
+    return render(request, 'shop/customer_profile.html', {'customer': customer, 'profile_edit_form': profile_edit_form})
+
+
+def profile_edit_form(request, customer_id):
+
+    if request.method == "POST":
+        
+        customer = Customer.objects.get(id=customer_id)
+        profile_edit_form = ProfileEditForm(data=request.POST, instance=customer)
+        
+        if profile_edit_form.is_valid():
+            profile = profile_edit_form.save(commit=False)
+            customer.customer = request.user
+            profile.save()
+            messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updating Profile!')
+
+    return HttpResponseRedirect(reverse('customer_profile', args=[]))
 
 
 def renting_form(request, slug):
@@ -170,3 +188,5 @@ def customer_profile_registration(request):
         request, "shop/customer_profile_registration.html",
         {"customer_profile_registration_form": customer_profile_registration_form},
     )
+
+

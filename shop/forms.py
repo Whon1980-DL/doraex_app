@@ -37,3 +37,10 @@ class CustomerProfileRegistrationForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ('first_name', 'last_name', 'age', 'phone', 'email', 'shipping_address',)
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ('first_name', 'last_name', 'age', 'phone', 'email', 'shipping_address',)
+       

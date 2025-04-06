@@ -4,6 +4,18 @@
     width: 13px !important;
   }
 
+  .cart {
+    width: 22px !important
+  }
+
+  .profile {
+    width: 30px;
+  }
+
+  .yellow {
+    background-color: #fae335;
+  }
+
   .text-dora-yellow {
     color: #fae335 !important;
   }

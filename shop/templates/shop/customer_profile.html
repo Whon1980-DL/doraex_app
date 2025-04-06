@@ -1,22 +1,44 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <!-- Product section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
-                <div class="small mb-1">First name: {{ customer.first_name }}</div>
-                <div class="small mb-1">Last name: {{ customer.last_name }}</div>
-                <div class="small mb-1">Age: {{ customer.age }}</div>
-                <div class="small mb-1">Phone: {{ customer.phone }}</div>
-                <div class="small mb-1">Email: {{ customer.email }}</div>
-                <div class="small mb-1">Shipping Address: {{ customer.shipping_address }}</div>
+                <div class="col mb-5">
+                    <div id="customer{{ customer.id }}" class="card h-100">
+                        <div class="large mb-3 px-2"><strong>First name:</strong><span id="first_name">{{ customer.first_name }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Last name:</strong><span id="last_name">{{ customer.last_name }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Age:</strong><span id="age">{{ customer.age }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Phone:</strong><span id="phone">{{ customer.phone }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Email:</strong><span id="email">{{ customer.email }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Shipping Address:</strong><span id="shipping_address">{{ customer.shipping_address }}</span></div>
+                        <button id="editButton" type="submit" customer_id="{{ customer.id }}" class="btn btn-info mt-auto">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+</section>
+<section class="py-2">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <!-- Creating Renting Form -->
+            <form class="d-none" id="profileEditForm" method="post" style="margin-top: 1.3em;">
+                <p>You are editing your user profile:</p>
+                {{ profile_edit_form | crispy }}
+                {% csrf_token %}
+                <button id="submitButton" type="submit" class="btn btn-info btn-lg">Update</button>
+            </form>
+        </div>
+    </div>
 </section>
 
+{% endblock %}
+
+{% block extras %}
+<script src="{% static 'js/profile_edit.js' %}"></script>
 {% endblock %}
