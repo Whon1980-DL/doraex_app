@@ -49,18 +49,27 @@ def gadget_view(request, slug):
 
 def customer_profile_registration(request):
 
-    if request.method == "POST":
-        customer_profile_registration_form = CustomerProfileRegistrationForm(data=request.POST)
-        if customer_profile_registration_form.is_valid():
-            customer_profile_registration_form.save()
-            messages.add_message(request, messages.SUCCESS, "Thank you for creating your customer profile. Please head back to our Home to start your renting ")
+    customer = Customer.objects.all()
+    username = request.user
 
-    customer_profile_registration_form = CustomerProfileRegistrationForm()
+    if customer.filter(customer=username).exists(): 
+        messages.add_message(request, messages.ERROR, "You already haver an existing customer profile to edit please go to view profile to edit")
 
-    return render(
-        request, "shop/customer_profile_registration.html",
-        {"customer_profile_registration_form": customer_profile_registration_form},
-    )
+        return HttpResponseRedirect(reverse('home', args=[]))
+
+    else:
+        if request.method == "POST":
+            customer_profile_registration_form = CustomerProfileRegistrationForm(data=request.POST)
+            if customer_profile_registration_form.is_valid():
+                customer_profile_registration_form.save()
+                messages.add_message(request, messages.SUCCESS, "Thank you for creating your customer profile. Please head back to our Home to start your renting ")
+
+        customer_profile_registration_form = CustomerProfileRegistrationForm()
+
+        return render(
+            request, "shop/customer_profile_registration.html",
+            {"customer_profile_registration_form": customer_profile_registration_form},
+        )
 
 
 def customer_profile(request):

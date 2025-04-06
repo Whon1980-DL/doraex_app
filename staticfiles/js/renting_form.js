@@ -1,4 +1,4 @@
-const addToCartButton = document.getElementsByID("addToCart");
+const addToCartButton = document.getElementById("addToCart");
 const continueModal = new bootstrap.Modal(document.getElementById("continueModal"));
 /**
 * Initializes edit functionality for the provided edit buttons.
@@ -11,7 +11,6 @@ const continueModal = new bootstrap.Modal(document.getElementById("continueModal
 * - Sets the form's action attribute to the `edit_comment/{commentId}` endpoint.
 */
 
-
-addToCartButton.addEventListener("click", (e) => {
-continueModal.show();
-});
+/** addToCartButton.addEventListener("click", (e) => {
+/** continueModal.show();
+/** });
