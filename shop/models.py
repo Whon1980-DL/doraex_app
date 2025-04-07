@@ -48,7 +48,7 @@ class Customer(models.Model):
     shipping_address = models.TextField(blank=False, default="")
     
     def __str__(self):
-        return f"{self.id} {self.first_name} {self.last_name}|age {self.age}"
+        return f"{self.id} {self.first_name} {self.last_name}|age {self.age} {self.customer} "
 
 
 STATUS = ((0, "peding"), (1, "complete"))
@@ -61,14 +61,14 @@ class Renting(models.Model):
             raise ValidationError("The date cannot be in the past")
         
     gadget = models.ForeignKey(Gadget, on_delete=models.CASCADE, related_name="renting_item")
-    quantity = models.IntegerField(default="", blank=False)
+    quantity = models.PositiveIntegerField(default="", blank=False)
     price = models.IntegerField(default=0)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="renter")
     first_name = models.CharField(max_length=50, blank=False, default="")
     last_name = models.CharField(max_length=50, blank=False, default="")
     start_date = models.DateField(default=date.today, validators=[Date_validation])
     end_date = models.DateField(default=date.today, validators=[Date_validation])
-    number_days_rent = models.IntegerField(default="", blank=False)
+    number_days_rent = models.PositiveIntegerField(default="", blank=False)
     address = models.CharField(max_length=300, default="", blank=False)
     email = email = models.EmailField(default="", max_length=250)
     phone = models.CharField(max_length=30, default="", blank=True)

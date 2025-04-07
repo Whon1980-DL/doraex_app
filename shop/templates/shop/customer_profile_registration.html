@@ -7,10 +7,10 @@
         <div class="col-md-4 card mb-4 mt-3">
             <div class="card-body">
                 <h3>
-                    Great choice! You have selected to rent <span class="text-info">{{ gadget.gadget_name}}
-                    </span>, please fill in the form to proceed.
+                    Please fill in this form with your detail to create your customer profile. 
+                    This detail will be used when you rent our gadget.
                 </h3>
-                <form method="post">
+                <form id="CustomerProfileRegistrationForm" method="post">
                     {{ customer_profile_registration_form | crispy }}
                     {% csrf_token %}
                     <button type="submit" class="btn btn-info btn-lg">Submit</button>

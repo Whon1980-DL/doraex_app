@@ -54,21 +54,27 @@ def customer_profile_registration(request):
 
     if customer.filter(customer=username).exists(): 
         messages.add_message(request, messages.ERROR, "You already haver an existing customer profile to edit please go to view profile to edit")
-
+        print('line 57')
         return HttpResponseRedirect(reverse('home', args=[]))
 
     else:
+        print('line 61')
         if request.method == "POST":
             customer_profile_registration_form = CustomerProfileRegistrationForm(data=request.POST)
+            print('line 64')
             if customer_profile_registration_form.is_valid():
+                print('line 66')
+                customer = customer_profile_registration_form.save(commit=False)
+                customer.customer = request.user
                 customer_profile_registration_form.save()
                 messages.add_message(request, messages.SUCCESS, "Thank you for creating your customer profile. Please head back to our Home to start your renting ")
-
+                print('line 70')
         customer_profile_registration_form = CustomerProfileRegistrationForm()
 
         return render(
             request, "shop/customer_profile_registration.html",
             {"customer_profile_registration_form": customer_profile_registration_form},
+            print('line 76')
         )
 
 
@@ -88,13 +94,13 @@ def customer_profile(request):
         return render(request, 'shop/no_customer_profile_page.html')
 
 
-def profile_edit_form(request):
+def profile_edit_form(request, customer_id):
+
+    queryset = Customer.objects.all()
+    customer = get_object_or_404(queryset, id=customer_id)
+    profile_edit_form = ProfileEditForm(data=request.POST, instance=customer)
 
     if request.method == "POST":
-        
-        customer = request.user
-        profile_edit_form = ProfileEditForm(data=request.POST, instance=customer)
-        
         if profile_edit_form.is_valid():
             profile = profile_edit_form.save(commit=False)
             profile.save()
