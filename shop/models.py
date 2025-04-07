@@ -22,13 +22,13 @@ class Gadget(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, related_name="gadgets")
     detail_description = models.TextField(blank=False)
     intended_use = models.CharField(max_length=300, blank=False)
-    warning = models.TextField(max_length=200, default="No warning")
+    warning = models.CharField(max_length=2000, default="No warning")
     minimum_usage_age = models.IntegerField(default="18")
     unit_rent_price = models.IntegerField(default=0)
     creater = models.ForeignKey(User, on_delete=models.PROTECT, related_name="gadget_created")
     created_on = models.DateField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    short_description = models.TextField(blank=False)
+    short_description = models.CharField(blank=False)
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -45,7 +45,7 @@ class Customer(models.Model):
     age = models.IntegerField(blank=False, default="18")
     phone = models.CharField(max_length=50, blank=False)
     email = models.EmailField(max_length=250)
-    shipping_address = models.TextField(blank=False, default="")
+    shipping_address = models.CharField(max_length=2000, blank=False, default="")
     
     def __str__(self):
         return f"{self.id} {self.first_name} {self.last_name}|age {self.age} {self.customer} "

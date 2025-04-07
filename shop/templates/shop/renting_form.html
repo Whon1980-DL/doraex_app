@@ -19,36 +19,14 @@
                 <form id="rentingForm" method="post" style="margin-top: 1.3em;">
                     {{ renting_form | crispy }}
                     {% csrf_token %}
-                    <button id="addToCart" type="submit" class="btn btn-info btn-lg">Add to cart</button>
+                    <a href="{% url 'home' %}"><button id="addToCart" type="submit" class="btn btn-info btn-lg">Add to cart</button></a>
                 </form>
-                {% if renting_form.start_date.value == today_date or renting_form.end_date.value == today_date%}
-                <dive>Date can not be in the past</dive>
-                {% endif %}
             </div>
         </div>
         {% endif %}
     </div>
     </div>
 </section>
-<div class="modal fade" id="continueModal" tabindex="-1" aria-labelledby="continueModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="continueModalLabel">Rent added to cart!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Thank you for chossing our gadget.
-                Please view your cart and confirm to checkout or go back to home page to continue your shopping.
-            </div>
-            <div class="modal-footer">
-                <a id="rentConfirm" href="{% url 'home' %}" class="btn btn-warning">Home</a>
-                <a id="rentConfirm" href="{% url 'cart' %}" class="btn btn-info">Go to cart</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 {% endblock %}
 
 {% block extras %}
