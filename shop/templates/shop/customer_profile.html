@@ -15,7 +15,7 @@
                         <div class="large mb-3 px-2"><strong>Phone:</strong><span id="phone">{{ customer.phone }}</span></div>
                         <div class="large mb-3 px-2"><strong>Email:</strong><span id="email">{{ customer.email }}</span></div>
                         <div class="large mb-3 px-2"><strong>Shipping Address:</strong><span id="shipping_address">{{ customer.shipping_address }}</span></div>
-                        <button id="editButton" customer_id="{{ customer.id }}" type="submit" class="btn btn-info mt-auto">Edit</button>
+                        <div class="large mb-3 px-2"><a href="#profileEditForm"><button id="editButton" customer_id="{{ customer.id }}" type="submit" class="btn btn-info mt-auto">Edit</button></a></div>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <p>You are editing your user profile:</p>
                 {{ profile_edit_form | crispy }}
                 {% csrf_token %}
-                <button id="submitButton" type="submit" class="btn btn-info btn-lg">Update</button>
+                <button id="submitButton" type="submit" class="btn btn-info mt-auto">Update</button>
             </form>
         </div>
     </div>

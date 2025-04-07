@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from datetime import date, timedelta
 from django.core.exceptions import ValidationError
@@ -20,6 +21,7 @@ class Gadget(models.Model):
     gadget_name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, related_name="gadgets")
+    featured_image = CloudinaryField('image', default='default')
     detail_description = models.TextField(blank=False)
     intended_use = models.CharField(max_length=300, blank=False)
     warning = models.CharField(max_length=2000, default="No warning")

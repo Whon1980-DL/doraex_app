@@ -9,11 +9,10 @@ admin.site.register(Category)
 
 @admin.register(Gadget)
 class GadgetAdmin(admin.ModelAdmin):
-    list_display = ('id', 'gadget_name', 'gadget_id', 'slug', 'minimum_usage_age', 'status')
+    list_display = ('gadget_id', 'gadget_name', 'category', 'unit_rent_price', 'minimum_usage_age',)
     search_fields = ['gadget_id', 'gadget_name', 'detail_description']
-    list_filter = ('status', 'created_on')
+    list_filter = ('status', 'minimum_usage_age')
     prepopulated_fields = {'slug': ('gadget_name',)}
-    summernote_fields = ('detail_description', 'warning', 'short_description')
 
 
 @admin.register(Customer)
