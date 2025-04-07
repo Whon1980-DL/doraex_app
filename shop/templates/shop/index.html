@@ -25,7 +25,7 @@
 
                     {% for gadget in gadget_list %}
                     <div class="col mb-5">
-                        <div class="card h-100">
+                        <div class="card h-100 yellow">
                             <!-- Product image-->
                             {% if "default" in gadget.featured_image.url %}
                             <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="default image">
@@ -33,7 +33,7 @@
                             <img class="card-img-top" src=" {{ gadget.featured_image.url }}" alt="{{ gadget.gadget_name }}">
                             {% endif %}
                             <!-- Product details-->
-                            <div class="card-body p-4">
+                            <div class="card-body p-4 bg-info">
                                 <div class="text-center text-dark">
                                     <!-- Product name-->
                                     <h3 class="fw-bolder ">{{ gadget.gadget_name }}</h3>
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-info">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto yellow"
                                         href="{% url 'gadget_view' gadget.slug %}">View</a></div>
                             </div>
@@ -63,10 +63,10 @@
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo;PREV</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link yellow"> &laquo;PREV</a></li>
             {% endif %}
             {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link yellow"> NEXT &raquo;</a></li>
             {% endif %}
         </ul>
     </nav>

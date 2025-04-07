@@ -7,9 +7,9 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">{% if "default" in gadget.featured_image.url %}
-                <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="default image">
+                <img class="card-img-top bg-yellow" src="{% static 'images/default.jpg' %}" alt="default image">
                 {% else %}
-                <img class="card-img-top" src=" {{ gadget.featured_image.url }}" alt="{{ gadget.gadget_name }}">
+                <img class="card-img-top bg-yellow" src=" {{ gadget.featured_image.url }}" alt="{{ gadget.gadget_name }}">
                 {% endif %}
             </div>
             <div class="col-md-6">
@@ -21,7 +21,7 @@
                 </div>
                 <p class="lead">{{ gadget.detail_description | safe }}</p>
                 <div class="d-flex">
-                    {% if user == customer %}
+                    {% if user.is_authenticated %}
                     <a href="{% url 'renting_form' gadget.slug %}">
                         <button class="btn flex-shrink-0 btn-info" type="button">
                             <i class="bi-cart-fill me-1"></i>
