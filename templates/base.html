@@ -112,9 +112,9 @@
 
     <main class="flex-shrink-0 main-bg"></main>
     {% if user.is_authenticated %}
-    <p class="text-end m-0 yellow form-select-sm">You are logged in as {{ user }}</p>
+    <p class="text-end m-0 yellow form-select-sm form-switch form-check-reverse ">You are logged in as {{ user }}</p>
     {% else %}
-    <p class="text-end m-0 yellow form-select-sm">You are not logged in</p>
+    <p class="text-end m-0 yellow form-select-sm form-switch form-check-reverse ">You are not logged in</p>
     {% endif %}
     {% block content %}
     <!-- Content goes here-->
