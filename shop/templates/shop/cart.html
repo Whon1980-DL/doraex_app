@@ -22,9 +22,7 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 table-responsive">
                     <table class="table col-4 text-center">
-                        {% if gadget_count == 0 %}
-                        <p>You have no pending rent.</p>
-                        {% else %}
+                        
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Renting ID</th>
@@ -64,7 +62,6 @@
                                         class="btn btn-success btn-confirm btn-sm">Confirm</button></td>{% endif %}
                             </tr>
                             {% endfor %}
-                            {% endif %}
                     </table>
                 </div>
             </div>

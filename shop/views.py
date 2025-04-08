@@ -150,22 +150,46 @@ def renting_form(request, slug):
         return cart(request)
     
     else:
-        messages.add_message(request, messages.ERROR, 'Error renting the gadget please go to Profile registration link above to create one before proceed!')
+        if request.method == "GET":
 
-        return render(request, 'shop/no_customer_profile_page.html')
+            customer_profile_registration_form = CustomerProfileRegistrationForm()
+            return render(request, 
+                          "shop/customer_profile_registration_from_rent.html", 
+                          {'customer_profile_registration_form': customer_profile_registration_form},
+                          )
+        if request.method == "POST":
+            customer_profile_registration_form = CustomerProfileRegistrationForm(data=request.POST)
+            print('line 64')
+            if customer_profile_registration_form.is_valid():
+                print('line 66')
+                customer = customer_profile_registration_form.save(commit=False)
+                customer.customer = request.user
+                customer_profile_registration_form.save()
+                messages.add_message(request, messages.SUCCESS, "Thank you for creating your customer profile. Please continue to enjoy your renting experience")
+                print('line 70')
+
+                customer_profile_registration_form = CustomerProfileRegistrationForm()
+
+                renting_form = RentingForm()
+                return render(request, "shop/renting_form.html", 
+                              {'renting_form': renting_form, 'gadget': gadget, 'customer': customer, 'today_date': today_date},
+                              )
 
 
 def cart(request):
+    print('about to render cart')
     customer = request.user
-    renting_pending = Renting.objects.all()
-    cart = renting_pending.filter(customer=customer)
-    cart_list = cart.all().order_by('status')
-    gadget_count = cart.all().count()
+    print(customer)
+    renting = Renting.objects.all()
+    customer_rent = renting.filter(customer=customer)
+    cart_list = customer_rent.all().order_by('status', '-created_on')
+    print(cart_list)
+    gadget_count = cart_list.filter(status=0).count()
     rent_edit_form = RentEditForm()
     
-    return render(request, 'shop/cart.html',
-        {'cart_list': cart_list, 'gadget_count': gadget_count, 'customer': customer, 'rent_edit_form': rent_edit_form},
-    )
+    return render(request, 'shop/cart.html', 
+                  {'cart_list': cart_list, 'gadget_count': gadget_count, 'customer': customer, 'rent_edit_form': rent_edit_form},
+                  )
 
 
 def renting_edit_form(request, renting_id):
@@ -188,18 +212,17 @@ def renting_edit_form(request, renting_id):
     return HttpResponseRedirect(reverse('cart', args=[]))
 
 
-def renting_confirm(request, renting_id):
+def renting_confirm(request, renting_id): 
 
     queryset = Renting.objects.filter(status=0)
     renting = get_object_or_404(queryset, pk=renting_id)
     renting.status = 1
     renting.save()
     messages.add_message(
-        request, messages.SUCCESS, 
-        'Your rent is confirmed and your gadget are on their way. Please pay upon delivery'
-        )
-    
-    return HttpResponseRedirect(reverse('cart', args=[]))
+            request, messages.SUCCESS, 
+            'Your rent is confirmed and your gadget are on their way. Please pay upon delivery'
+            )
+    return cart(request)
 
 
 def renting_delete(request, renting_id):
