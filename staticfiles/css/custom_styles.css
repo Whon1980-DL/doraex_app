@@ -1,26 +1,30 @@
 /* Custom CSS */
 
 .logo {
-    width: 13px !important;
-  }
+  width: 13px !important;
+}
 
-  .cart {
-    width: 22px !important
-  }
+.cart {
+  width: 22px !important
+}
 
-  .profile {
-    width: 30px;
-  }
+.profile {
+  width: 30px;
+}
 
-  .yellow {
-    background-color: #fae335;
-  }
+.yellow {
+  background-color: #fae335;
+}
 
-  .text-dora-yellow {
-    color: #fae335 !important;
-  }
+.bg-dora-light-blue {
+  background-color: #f0fcfc !important;
+}
 
-  .px-lg-15 {
-    padding-right: 15rem !important;
-    padding-left: 15rem !important;
-  }
+.text-dora-yellow {
+  color: #fae335 !important;
+}
+
+.px-lg-15 {
+  padding-right: 15rem !important;
+  padding-left: 15rem !important;
+}
