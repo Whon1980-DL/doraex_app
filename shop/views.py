@@ -147,7 +147,7 @@ def renting_form(request, slug):
 
                 messages.add_message(request, messages.SUCCESS, "Gadget add to cart please review cart to check out or contitue shopping ")
 
-        return cart(request)
+        return HttpResponseRedirect(reverse('cart', args=[]))
     
     else:
         if request.method == "GET":
@@ -179,7 +179,6 @@ def renting_form(request, slug):
 def cart(request):
     print('about to render cart')
     customer = request.user
-    print(customer)
     renting = Renting.objects.all()
     customer_rent = renting.filter(customer=customer)
     cart_list = customer_rent.all().order_by('status', '-created_on')
@@ -222,7 +221,7 @@ def renting_confirm(request, renting_id):
             request, messages.SUCCESS, 
             'Your rent is confirmed and your gadget are on their way. Please pay upon delivery'
             )
-    return cart(request)
+    return HttpResponseRedirect(reverse('cart', args=[]))
 
 
 def renting_delete(request, renting_id):
