@@ -89,9 +89,9 @@ def customer_profile(request):
         profile_edit_form = ProfileEditForm()
         return render(request, 'shop/customer_profile.html', {'customer': customer, 'profile_edit_form': profile_edit_form})
     else:
-        messages.add_message(request, messages.ERROR, 'Error viewing Profile please go to Profile registration link above to create one!')
+        messages.add_message(request, messages.ERROR, 'Please fill in the form below to create your customer profile and enjoy renting our gadgets!')
 
-        return render(request, 'shop/no_customer_profile_page.html')
+        return HttpResponseRedirect(reverse('customer_profile_registration', args=[]))
 
 
 def profile_edit_form(request, customer_id):
@@ -153,8 +153,11 @@ def renting_form(request, slug):
         if request.method == "GET":
 
             customer_profile_registration_form = CustomerProfileRegistrationForm()
+
+            messages.add_message(request, messages.ERROR, 'Please fill in the form below to create your customer profile before you can rent our gadgets')
+
             return render(request, 
-                          "shop/customer_profile_registration_from_rent.html", 
+                          "shop/customer_profile_registration.html", 
                           {'customer_profile_registration_form': customer_profile_registration_form},
                           )
         if request.method == "POST":

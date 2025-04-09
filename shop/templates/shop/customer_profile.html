@@ -3,46 +3,46 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <!-- Product section-->
-<section class="py-5 bg-dora-light-blue-">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
-                <div class="card h-100">
+<section class="py-5 bg-dora-light-blue">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="col-md-4 card mb-4 mt-3 justify-content-center">
+            <div class="card">
                     <!-- Product details-->
-                    <div class="card-body p-4">
-                        <h3>
-                            Great choice! You have selected to rent <span class="text-info">
-                                {{gadget.gadget_name}}
-                            </span>, please fill in the form to proceed.
-                        </h3>
-                        <div id="customer{{ customer.id }}">
-                            <div class="large mb-3 px-2"><strong>First name:</strong><span id="first_name">{{ customer.first_name }}</span></div>
-                            <div class="large mb-3 px-2"><strong>Last name:</strong><span id="last_name">{{ customer.last_name }}</span></div>
-                            <div class="large mb-3 px-2"><strong>Age:</strong><span id="age">{{ customer.age }}</span></div>
-                            <div class="large mb-3 px-2"><strong>Phone:</strong><span id="phone">{{ customer.phone }}</span></div>
-                            <div class="large mb-3 px-2"><strong>Email:</strong><span id="email">{{ customer.email }}</span></div>
-                            <div class="large mb-3 px-2"><strong>Shipping Address:</strong><span id="shipping_address">{{ customer.shipping_address }}</span></div>
-                            <div class="large mb-3 px-2"><a href="#profileEditForm"><button id="editButton" customer_id="{{ customer.id }}" type="submit" class="btn btn-info mt-auto">Edit</button></a></div>
-                        </div>
+                <div class="p-4">
+                    <h3>
+                        Great choice! You have selected to rent <span class="text-info">
+                            {{gadget.gadget_name}}
+                        </span>, please fill in the form to proceed.
+                    </h3>
+                    <hr>
+                    <div id="customer{{ customer.id }}">
+                        <div class="large mb-3 px-2"><strong>First name:</strong><span id="first_name">{{ customer.first_name }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Last name:</strong><span id="last_name">{{ customer.last_name }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Age:</strong><span id="age">{{ customer.age }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Phone:</strong><span id="phone">{{ customer.phone }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Email:</strong><span id="email">{{ customer.email }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Shipping Address:</strong><span id="shipping_address">{{ customer.shipping_address }}</span></div>
+                        <div class="large mb-3 px-2"><a href="#profileEditForm"><button id="editButton" customer_id="{{ customer.id }}" type="submit" class="btn btn-info mt-auto">Edit</button></a></div>
                     </div>
                 </div>
             </div>
-            <div class="col mb-5 d-none" id="profile-edit-form-holder">
-                <div class="card h-100">
+        </div>
+        <div class="col-md-4 card mb-4 mt-3 justify-content-center d-none" id="profile-edit-form-holder">
+            <div class="card">
                     <!-- Product details-->
-                    <div class="card-body p-4">
-                        <h3>
-                            Great choice! You have selected to rent <span class="text-info">
-                                {{gadget.gadget_name}}
-                            </span>, please fill in the form to proceed.
-                        </h3>
-                        <form id="profileEditForm" method="post" style="margin-top: 1.3em;">
-                            <p>You are editing your user profile:</p>
-                            {{ profile_edit_form | crispy }}
-                            {% csrf_token %}
-                            <button id="submitButton" type="submit" class="btn btn-info mt-auto">Update</button>
-                        </form>
-                    </div>
+                <div class="p-4">
+                    <h3>
+                        Great choice! You have selected to rent <span class="text-info">
+                            {{gadget.gadget_name}}
+                        </span>, please fill in the form to proceed.
+                    </h3>
+                    <hr>
+                    <form class="" id="profileEditForm" method="post" style="margin-top: 1.3em;">
+                        <p>You are editing your user profile:</p>
+                        {{ profile_edit_form | crispy }}
+                        {% csrf_token %}
+                        <button id="submitButton" type="submit" class="btn btn-info mt-auto">Update</button>
+                    </form>
                 </div>
             </div>
         </div>

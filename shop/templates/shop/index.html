@@ -19,7 +19,7 @@
     <div class="row">
 
         <!-- Gadget image and detail -->
-        <section class="py-5">
+        <section class="py-5 bg-dora-light-blue">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
@@ -45,7 +45,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-info">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto yellow"
+                                <div class="text-center"><a class="btn mt-auto yellow"
                                         href="{% url 'gadget_view' gadget.slug %}">View</a></div>
                             </div>
                         </div>
@@ -61,12 +61,12 @@
     </div>
     {% if is_paginated %}
     <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center bg-dora-light-blue">
             {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link yellow"> &laquo;PREV</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="btn  mt-auto yellow"> &laquo;PREV</a></li>
             {% endif %}
             {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link yellow"> NEXT &raquo;</a></li>
+            <li><a href="?page={{ page_obj.next_page_number }}" class="btn mt-auto yellow"> NEXT &raquo;</a></li>
             {% endif %}
         </ul>
     </nav>
