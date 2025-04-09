@@ -4,6 +4,10 @@
   width: 13px !important;
 }
 
+.welcome {
+  width: 30px !important;
+}
+
 .cart {
   width: 22px !important
 }
@@ -16,12 +20,20 @@
   background-color: #fae335;
 }
 
+.bg-dora-dark-blue {
+  background-color: #009edf;
+}
+
 .bg-dora-light-blue {
   background-color: #f0fcfc !important;
 }
 
 .text-dora-yellow {
   color: #fae335 !important;
+}
+
+.text-dora-blue {
+  color: #009edf;
 }
 
 .px-lg-15 {

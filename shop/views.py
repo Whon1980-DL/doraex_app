@@ -3,9 +3,8 @@ from django.views import generic
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from datetime import date, timedelta
-from django.http import HttpResponseRedirect
 from .models import Gadget, Category, Customer, Renting
-from .forms import RentingForm, RentEditForm, RentConfirmForm, CustomerProfileRegistrationForm, ProfileEditForm
+from .forms import RentingForm, RentEditForm, CustomerProfileRegistrationForm, ProfileEditForm
 
 
 # Create your views here.
@@ -13,6 +12,14 @@ class GadgetList(generic.ListView):
     queryset = Gadget.objects.filter(status=1)
     template_name = "shop/index.html"
     paginate_by = 4
+
+
+def home_view(request):
+    return render(request, 'shop/home.html')
+
+
+def contact_view(request):
+    return render(request, 'shop/contact.html')
 
 
 def category(request, dl):

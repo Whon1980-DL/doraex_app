@@ -5,7 +5,7 @@
 
 <!-- index.html content starts here -->
 <!-- Header-->
-<header class="bg-info py-5">
+<header class="bg-dora-dark-blue py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-dark">
             <h1 class="display-4 fw-bolder">From the past to the future </h1>
@@ -33,7 +33,7 @@
                             <img class="card-img-top" src=" {{ gadget.featured_image.url }}" alt="{{ gadget.gadget_name }}">
                             {% endif %}
                             <!-- Product details-->
-                            <div class="card-body p-4 bg-info">
+                            <div class="card-body p-4 bg-dora-dark-blue">
                                 <div class="text-center text-dark">
                                     <!-- Product name-->
                                     <h3 class="fw-bolder ">{{ gadget.gadget_name }}</h3>
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-info">
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-dora-dark-blue">
                                 <div class="text-center"><a class="btn mt-auto yellow"
                                         href="{% url 'gadget_view' gadget.slug %}">View</a></div>
                             </div>

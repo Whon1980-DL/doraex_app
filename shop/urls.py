@@ -3,6 +3,8 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.GadgetList.as_view(), name='home'),
+    path('home/', views.home_view, name='home_one'),
+    path('contact/', views.contact_view, name='contact'),
     path('customer_profile_registration/', views.customer_profile_registration, name='customer_profile_registration'),
     path('cart/', views.cart, name='cart'),
     path('cart/edit_renting/<int:renting_id>', views.renting_edit_form, name='renting_edit_form'),
