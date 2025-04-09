@@ -6,6 +6,7 @@ const phoneText = document.getElementById("id_phone");
 const emailText = document.getElementById("id_email");
 const shippingAddressText = document.getElementById("id_shipping_address");
 const profileEditForm = document.getElementById("profileEditForm");
+const profileEditFormHolder = document.getElementById("profile-edit-form-holder")
 const submitButton = document.getElementById("submitButton");
 
 /**
@@ -20,7 +21,7 @@ const submitButton = document.getElementById("submitButton");
 */
 editButton.addEventListener("click", (e) => {
     let customerId = e.target.getAttribute("customer_id");
-    profileEditForm.classList.remove("d-none");
+    profileEditFormHolder.classList.remove("d-none");
     let firstNameContent = document.getElementById("first_name").innerText;
     firstNameText.value = firstNameContent;
     let lastNameContent = document.getElementById("last_name").innerText;
