@@ -16,8 +16,11 @@
                 <div class="small mb-1">Gadget ID: {{ gadget.gadget_id }}</div>
                 <h1 class="display-5 fw-bolder">{{ gadget.gadget_name }}</h1>
                 <div class="fs-5 mb-5">
-                    <span>£{{ gadget.unit_rent_price }} a day</span><span>
-                        Not suitable for anyone under {{ gadget.minimum_usage_age }} year.</span>
+                    <p>£{{ gadget.unit_rent_price }} a day</p>
+                    <span><img class="view-page-icon" src="{% static 'images/warning.png' %}" alt="warning sign"></span><span>
+                        {{ gadget.warning }}</span>
+                    <span><img class="view-page-icon" src="{% static 'images/age.png' %}" alt="age restriced"></span><span>
+                        {{ gadget.minimum_usage_age }}</span>
                 </div>
                 <p class="lead">{{ gadget.detail_description | safe }}</p>
                 <div class="d-flex">

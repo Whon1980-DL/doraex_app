@@ -7,7 +7,7 @@
 <!-- Header-->
 <header class="bg-dora-dark-blue py-5">
     <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-dark">
+        <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">From the past to the future </h1>
             <p class="lead fw-normal text-secondary-50 mb-0">Experience the greatest dream of all time with our Doraemon
                 gadget range </p>
@@ -36,11 +36,11 @@
                             <div class="card-body p-4 bg-dora-dark-blue">
                                 <div class="text-center text-dark">
                                     <!-- Product name-->
-                                    <h3 class="fw-bolder ">{{ gadget.gadget_name }}</h3>
+                                    <h4 class="fw-bolder ">{{ gadget.gadget_name }}</h4>
                                     <!-- Gadget short description-->
-                                    <h6>{{ gadget.short_description }}</h6>
+                                    <p>{{ gadget.short_description }}</p>
                                     <!-- Product price-->
-                                    <h4>£ {{ gadget.unit_rent_price}}</h4>
+                                    <h6>£ {{ gadget.unit_rent_price}}</h6>
                                 </div>
                             </div>
                             <!-- Product actions-->
