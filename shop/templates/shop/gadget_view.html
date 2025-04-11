@@ -2,27 +2,38 @@
 {% load static %}
 
 {% block content %}
-<!-- Product section-->
+<!-- Gadget view section-->
 <section class="py-5 bg-dora-light-blue">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6">{% if "default" in gadget.featured_image.url %}
+            <!-- Gadget image-->
+            <div class="col-md-6">
+                {% if "default" in gadget.featured_image.url %}
                 <img class="card-img-top bg-yellow" src="{% static 'images/default.jpg' %}" alt="default image">
                 {% else %}
-                <img class="card-img-top bg-yellow" src=" {{ gadget.featured_image.url }}" alt="{{ gadget.gadget_name }}">
+                <img class="card-img-top bg-yellow" src=" {{ gadget.featured_image.url }}"
+                    alt="{{ gadget.gadget_name }}">
                 {% endif %}
             </div>
+            <!-- Gadget full description and intended use -->
             <div class="col-md-6">
                 <div class="small mb-1">Gadget ID: {{ gadget.gadget_id }}</div>
                 <h1 class="display-5 fw-bolder">{{ gadget.gadget_name }}</h1>
-                <div class="fs-5 mb-5">
-                    <p>£{{ gadget.unit_rent_price }} a day</p>
-                    <span><img class="view-page-icon" src="{% static 'images/warning.png' %}" alt="warning sign"></span><span>
-                        {{ gadget.warning }}</span>
-                    <span><img class="view-page-icon" src="{% static 'images/age.png' %}" alt="age restriced"></span><span>
-                        {{ gadget.minimum_usage_age }}</span>
-                </div>
                 <p class="lead">{{ gadget.detail_description | safe }}</p>
+                <div class="fs-5 mb-5">
+                    <p class="text-dora-blue">{{ gadget.intended_use }}</p>
+                    <p><span><img class="view-page-icon" src="{% static 'images/pound.png' %}" alt="pound sign"></span>
+                        <span>{{ gadget.unit_rent_price }} / day</span>
+                    </p>
+                    <p><span><img class="view-page-icon" src="{% static 'images/warning.png' %}"
+                                alt="warning sign"></span>
+                        <span>{{ gadget.warning }}</span>
+                    </p>
+                    <p><span><img class="view-page-icon" src="{% static 'images/age.png' %}" alt="age restriced"></span>
+                        <span>{{ gadget.minimum_usage_age }} + </span>
+                    </p>
+                </div>
+                <!-- Gadget view actions -->
                 <div class="d-flex">
                     {% if user.is_authenticated %}
                     <a href="{% url 'renting_form' gadget.slug %}">
@@ -41,5 +52,5 @@
         </div>
     </div>
 </section>
-
+<!-- content ends here -->
 {% endblock %}

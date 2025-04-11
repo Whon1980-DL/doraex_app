@@ -2,18 +2,20 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+
+<!-- Customer profile registration form -->
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="col-md-4 card mb-4 mt-3 justify-content-center">
             <div class="card-body">
                 <h3>
-                    Please fill in this form with your detail to create your customer profile. 
+                    Please fill in this form with your detail to create your customer profile.
                     This detail will be used when you rent our gadget.
                 </h3>
                 <form id="CustomerProfileRegistrationForm" method="post">
                     {{ customer_profile_registration_form | crispy }}
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-info btn-lg">Submit</button>
+                    <button type="submit" class="btn bg-dora-dark-blue">Submit</button>
                 </form>
             </div>
         </div>
@@ -21,5 +23,5 @@
     </div>
 </section>
 
+<!-- html content end here -->
 {% endblock %}
-

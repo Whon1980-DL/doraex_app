@@ -2,39 +2,44 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<!-- Product section-->
+<!-- Customer detail -->
 <section class="py-5 bg-dora-light-blue">
     <div class="container px-4 px-lg-5 my-5">
         <div class="col-md-4 card mb-4 mt-3 justify-content-center">
             <div class="card">
-                    <!-- Product details-->
+                    <!-- Customer detail view -->
                 <div class="p-4">
-                    <h3>
-                        Great choice! You have selected to rent <span class="text-info">
-                            {{gadget.gadget_name}}
-                        </span>, please fill in the form to proceed.
-                    </h3>
+                    <h3>Customer Detail</h3>
+                    <h5>
+                        Here is your detail that you have given us. The detail is used for renting purpose. 
+                        You can edit your detail where neccessary by clicking the edit button.
+                    </h5>
                     <hr>
                     <div id="customer{{ customer.id }}">
-                        <div class="large mb-3 px-2"><strong>First name:</strong><span id="first_name">{{ customer.first_name }}</span></div>
-                        <div class="large mb-3 px-2"><strong>Last name:</strong><span id="last_name">{{ customer.last_name }}</span></div>
-                        <div class="large mb-3 px-2"><strong>Age:</strong><span id="age">{{ customer.age }}</span></div>
-                        <div class="large mb-3 px-2"><strong>Phone:</strong><span id="phone">{{ customer.phone }}</span></div>
-                        <div class="large mb-3 px-2"><strong>Email:</strong><span id="email">{{ customer.email }}</span></div>
-                        <div class="large mb-3 px-2"><strong>Shipping Address:</strong><span id="shipping_address">{{ customer.shipping_address }}</span></div>
-                        <div class="large mb-3 px-2"><a href="#profileEditForm"><button id="editButton" customer_id="{{ customer.id }}" type="submit" class="btn btn-info mt-auto">Edit</button></a></div>
+                        <div class="large mb-3 px-2"><strong>First name:</strong><span id="first_name">
+                            {{ customer.first_name }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Last name:</strong><span id="last_name">
+                            {{ customer.last_name }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Age:</strong><span id="age">
+                            {{ customer.age }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Phone:</strong><span id="phone">
+                            {{ customer.phone }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Email:</strong><span id="email">
+                            {{ customer.email }}</span></div>
+                        <div class="large mb-3 px-2"><strong>Shipping Address:</strong><span id="shipping_address">
+                            {{ customer.shipping_address }}</span></div>
+                        <div class="large mb-3 px-2"><a href="#profileEditForm"><button id="editButton" 
+                            customer_id="{{ customer.id }}" type="submit" class="btn bg-dora-dark-blue mt-auto">Edit</button></a></div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4 card mb-4 mt-3 justify-content-center d-none" id="profile-edit-form-holder">
             <div class="card">
-                    <!-- Product details-->
+                <!-- Customer detail edit form-->
                 <div class="p-4">
                     <h3>
-                        Great choice! You have selected to rent <span class="text-info">
-                            {{gadget.gadget_name}}
-                        </span>, please fill in the form to proceed.
+                        Customer Detail Edit Form.
                     </h3>
                     <hr>
                     <form class="" id="profileEditForm" method="post" style="margin-top: 1.3em;">
@@ -48,9 +53,9 @@
         </div>
     </div>
 </section>
-
+<!-- html content end here -->
 {% endblock %}
-
+<!-- JavaScript for customer detail edition-->
 {% block extras %}
 <script src="{% static 'js/profile_edit.js' %}"></script>
 {% endblock %}

@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
 
-<!-- index.html content starts here -->
+<!-- html content starts here -->
 <!-- Header-->
-<header class="bg-info py-5">
+<header class="bg-dora-dark-blue py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-dark">
             <h1 class="display-4 fw-bolder">{{ category }} </h1>
-            <p class="lead fw-normal text-secondary-50 mb-0">Category Page</p>
         </div>
     </div>
 </header>
@@ -24,30 +22,31 @@
                     {% for gadget in gadget %}
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <!-- Product image-->
+                            <!-- Gadget image-->
                             {% if "default" in gadget.featured_image.url %}
-                            <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="default image">
+                            <img class="card-img-top yellow" src="{% static 'images/default.jpg' %}" alt="default image">
                             {% else %}
-                            <img class="card-img-top" src=" {{ gadget.featured_image.url }}" alt="{{ gadget.gadget_name }}">
+                            <img class="card-img-top yellow" src=" {{ gadget.featured_image.url }}" alt="{{ gadget.gadget_name }}">
                             {% endif %}
-                            <!-- Product details-->
-                            <div class="card-body p-4 bg-info">
+                            <!-- Gadget short description-->
+                            <div class="card-body p-4 bg-dora-dark-blue">
                                 <div class="text-center">
-                                    <!-- Product name-->
+                                    <!-- Gadget name-->
                                     <h3 class="fw-bolder">{{ gadget.gadget_name }}</h3>
                                     <!-- Gadget short description-->
                                     <h6>{{ gadget.short_description }}</h6>
-                                    <!-- Product price-->
+                                    <!-- Gadet daily rental price-->
                                     <h4>£ {{ gadget.unit_rent_price}}</h4>
                                 </div>
                             </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-info">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto yellow"
+                            <!-- Gadget actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-dora-dark-blue">
+                                <div class="text-center"><a class="btn mt-auto yellow"
                                         href="{% url 'gadget_view' gadget.slug %}">View</a></div>
                             </div>
                         </div>
                     </div>
+                    <!-- Pagination -->
                     {% if forloop.counter|divisibleby:2 %}
                 </div>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -71,5 +70,5 @@
     {% endif %}
 </div>
 
-<!-- index.html content ends here -->
+<!-- html content ends here -->
 {% endblock %}

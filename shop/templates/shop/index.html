@@ -1,56 +1,60 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
 
 <!-- index.html content starts here -->
 <!-- Header-->
 <header class="bg-dora-dark-blue py-5">
     <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">From the past to the future </h1>
-            <p class="lead fw-normal text-secondary-50 mb-0">Experience the greatest dream of all time with our Doraemon
-                gadget range </p>
+        <div class="text-center text-dark">
+            <h1 class="display-4 fw-bolder">Welcome to <span>D</span><span><img class="welcome"
+                        src="{% static '/images/logo.png' %}" alt="bell" /></span><span>raEx</span></h1>
+            <p class="lead fw-normal text-secondary-50 mb-0">
+                Where we bring you great range of doraemon gadgets to your door.
+                Experience the greatest dream of all time with our Doraemon
+                gadget range that will bring your memory of the past to the future.
+                Start by browsing our gadget range to find out more and you are just
+                few clicks away from experiencing your childhood dream.</p>
         </div>
     </div>
 </header>
-
+<!-- Gadget -->
 <div class="container-fluid">
     <div class="row">
-
-        <!-- Gadget image and detail -->
+        <!-- Gadget image and short description -->
         <section class="py-5 bg-dora-light-blue">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
                     {% for gadget in gadget_list %}
                     <div class="col mb-5">
                         <div class="card h-100 yellow">
-                            <!-- Product image-->
+                            <!-- Gadget image-->
                             {% if "default" in gadget.featured_image.url %}
                             <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="default image">
                             {% else %}
-                            <img class="card-img-top" src=" {{ gadget.featured_image.url }}" alt="{{ gadget.gadget_name }}">
+                            <img class="card-img-top" src=" {{ gadget.featured_image.url }}"
+                                alt="{{ gadget.gadget_name }}">
                             {% endif %}
-                            <!-- Product details-->
+                            <!-- Gadget short description-->
                             <div class="card-body p-4 bg-dora-dark-blue">
                                 <div class="text-center text-dark">
-                                    <!-- Product name-->
+                                    <!-- Gadget name-->
                                     <h4 class="fw-bolder ">{{ gadget.gadget_name }}</h4>
                                     <!-- Gadget short description-->
                                     <p>{{ gadget.short_description }}</p>
-                                    <!-- Product price-->
+                                    <!-- Gadget daily reantl price-->
                                     <h6>£ {{ gadget.unit_rent_price}}</h6>
                                 </div>
                             </div>
-                            <!-- Product actions-->
+                            <!-- Gadget actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-dora-dark-blue">
                                 <div class="text-center"><a class="btn mt-auto yellow"
                                         href="{% url 'gadget_view' gadget.slug %}">View</a></div>
                             </div>
                         </div>
                     </div>
-                    {% if forloop.counter|divisibleby:2 %}
+                    <!-- Pagination -->
+                    {% if forloop.counter|divisibleby:4 %}
                 </div>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {% endif %}
@@ -59,11 +63,12 @@
             </div>
         </section>
     </div>
+    <!-- Pagination action buttons -->
     {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center bg-dora-light-blue">
             {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="btn  mt-auto yellow"> &laquo;PREV</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="btn mt-auto yellow"> &laquo;PREV</a></li>
             {% endif %}
             {% if page_obj.has_next %}
             <li><a href="?page={{ page_obj.next_page_number }}" class="btn mt-auto yellow"> NEXT &raquo;</a></li>

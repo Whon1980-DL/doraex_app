@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 from django.contrib import messages
 from datetime import date, timedelta
 from .models import Gadget, Category, Customer, Renting
@@ -11,7 +12,7 @@ from .forms import RentingForm, RentEditForm, CustomerProfileRegistrationForm, P
 class GadgetList(generic.ListView):
     queryset = Gadget.objects.filter(status=1)
     template_name = "shop/index.html"
-    paginate_by = 4
+    paginate_by = 6
 
 
 def home_view(request):
@@ -187,12 +188,10 @@ def renting_form(request, slug):
 
 
 def cart(request):
-    print('about to render cart')
     customer = request.user
     renting = Renting.objects.all()
     customer_rent = renting.filter(customer=customer)
     cart_list = customer_rent.all().order_by('status', '-created_on')
-    print(cart_list)
     gadget_count = cart_list.filter(status=0).count()
     rent_edit_form = RentEditForm()
     

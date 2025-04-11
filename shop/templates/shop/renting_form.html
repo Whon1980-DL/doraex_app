@@ -3,19 +3,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<header class="bg-info py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-dark">
-            <h1 class="display-4 fw-bolder">From the past to the future </h1>
-            <p class="lead fw-normal text-secondary-50 mb-0">Experience the greatest dream of all time with our Doraemon
-                gadget range </p>
-        </div>
-    </div>
-</header>
-
+<!-- Gadget rental form -->
 <div class="container-fluid">
     <div class="row">
-        <!-- Gadget image and detail -->
+        <!-- Gadget image and form -->
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="col-md-4 card mb-4 mt-3 justify-content-center">
@@ -28,7 +19,7 @@
                             <img class="card-img-top" src=" {{ gadget.featured_image.url }}"
                                 alt="{{ gadget.gadget_name }}">
                             {% endif %}
-                            <!-- Product details-->
+                            <!-- Rental detail-->
                             <div class="">
                                 <h3>
                                     Great choice! You have selected to rent <span class="text-info">
@@ -38,8 +29,9 @@
                                 <form id="rentingForm" method="post" style="margin-top: 1.3em;">
                                     {{ renting_form | crispy }}
                                     {% csrf_token %}
+                                    <!-- Renting action -->
                                     <a href="{% url 'home' %}"><button id="addToCart" type="submit"
-                                    class="btn btn-info btn-lg">Add to cart</button></a>
+                                            class="btn bg-dora-dark-blue ">Add to cart</button></a>
                                 </form>
                             </div>
                         </div>
@@ -50,5 +42,5 @@
     </div>
 </div>
 
-<!-- index.html content ends here -->
+<!-- content ends here -->
 {% endblock %}
