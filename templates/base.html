@@ -5,24 +5,22 @@
 {% url 'account_logout' as logout_url %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
     <title>DoraEx</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{% static '/images/logo.png' %}" />
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{% static 'css/custom_styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/custom_styles.css' %}" rel="stylesheet">
 
 </head>
 
@@ -38,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link {% if request.path == home_url %}active"
-                            aria-current="home page{%endif%}" href="{% url 'home' %}">Home</a></li>
+                            aria-current="page{%endif%}" href="{% url 'home' %}">Home</a></li>
                     <!-- Category list -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
@@ -94,8 +92,8 @@
                 <div class="ms-md-2">
                     <a class="nav-link" href="{% url 'customer_profile' %}"><i class="fa fa-user fs-6"
                             aria-hidden="true"></i></a>
-                    {% endif %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -115,7 +113,7 @@
         </div>
     </div>
 
-    <main class="flex-shrink-0 main-bg"></main>
+    <main class="flex-shrink-0 main-bg">
     {% if user.is_authenticated %}
     <p class="text-end m-0 yellow form-select-sm form-switch form-check-reverse ">You are logged in as {{ user }}</p>
     {% else %}
