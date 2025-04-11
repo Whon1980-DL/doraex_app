@@ -6,8 +6,7 @@ const phoneText = document.getElementById("id_phone");
 const emailText = document.getElementById("id_email");
 const shippingAddressText = document.getElementById("id_shipping_address");
 const profileEditForm = document.getElementById("profileEditForm");
-const profileEditFormHolder = document.getElementById("profile-edit-form-holder")
-const submitButton = document.getElementById("submitButton");
+const profileEditFormHolder = document.getElementById("profile-edit-form-holder");
 
 /**
 * Initializes edit functionality for the provided edit buttons.

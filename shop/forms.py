@@ -11,7 +11,7 @@ class DatePickerInput(forms.DateInput):
 
 class CustomerProfileRegistrationForm(forms.ModelForm):
     """
-    Form class for users to create their customer profile 
+    Form class for users to create their customer profile
     """
     class Meta:
         """
@@ -28,7 +28,7 @@ class CustomerProfileRegistrationForm(forms.ModelForm):
 
 class ProfileEditForm(forms.ModelForm):
     """
-    Form class for users to edit their customer profile 
+    Form class for users to edit their customer profile
     """
     class Meta:
         """
@@ -42,7 +42,7 @@ class ProfileEditForm(forms.ModelForm):
 
 class RentingForm(forms.ModelForm):
     """
-    Form class for users to provide rental detail 
+    Form class for users to provide rental detail
     """
     class Meta:
         """
@@ -59,7 +59,7 @@ class RentingForm(forms.ModelForm):
 
 class RentEditForm(forms.ModelForm):
     """
-    Form class for users to edit their renting detail 
+    Form class for users to edit their renting detail
     """
     class Meta:
         """

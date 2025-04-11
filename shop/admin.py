@@ -22,7 +22,7 @@ class GadgetAdmin(admin.ModelAdmin):
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
     """
-    Lists fields for display in admin, fileds 
+    Lists fields for display in admin, fileds
     for search and field filters.
     """
     list_display = ('id', 'customer', 'first_name', 'last_name', 'age')
@@ -33,7 +33,7 @@ class CustomerAdmin(admin.ModelAdmin):
 @admin.register(Renting)
 class RentingAdmin(admin.ModelAdmin):
     """
-    Lists fields for display in admin, fileds 
+    Lists fields for display in admin, fileds
     for search and field filters.
     """
     list_display = ('id', 'customer', 'gadget', 'first_name',

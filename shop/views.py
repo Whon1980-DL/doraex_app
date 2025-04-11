@@ -60,7 +60,7 @@ def category(request, dl):
     category = Category.objects.get(category_name=dl)
     gadget = Gadget.objects.filter(category=category, status=1)
     return render(
-        request, 'shop/category.html', 
+        request, 'shop/category.html',
         {'category': category, 
          'gadget': gadget, }
          )
@@ -97,7 +97,7 @@ def customer_profile_registration(request):
     """
     Display profile registeration page,
     if user already have a profile a message will display
-    telling user they alreay have a profile created. 
+    telling user they alreay have a profile created.
     if the method is equal POST, customer enterd detail 
     will be saved to database through form completion.
 
@@ -109,7 +109,7 @@ def customer_profile_registration(request):
         An instance of customer related to the user
     ``customer_profile_registration_form``
         An instance of :form:`shop.CustomerProfileRegistrationForm`.
-        
+   
     **Template:**
 
     :template:`blog/customer_profile_registration.html`
@@ -320,7 +320,6 @@ def renting_form(request, slug):
                     "Please continue to enjoy your renting experience"
                     )
                 
-
                 customer_profile_registration_form = CustomerProfileRegistrationForm()
 
                 renting_form = RentingForm()
@@ -403,7 +402,7 @@ def renting_edit_form(request, renting_id):
             renting.end_date = end_date
             renting.save()
             messages.add_message(
-                request, messages.SUCCESS, 
+                request, messages.SUCCESS,
                 'Renting Updated!'
                 )
         else:

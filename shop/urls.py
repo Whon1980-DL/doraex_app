@@ -16,7 +16,7 @@ urlpatterns = [
          name='renting_confirm'),
     path('renting_form/confirm_renting/<int:renting_id>',
          views.renting_confirm, name='renting_confirm'),
-    path('cart/delete_renting/<int:renting_id>', views.renting_delete, 
+    path('cart/delete_renting/<int:renting_id>', views.renting_delete,
          name='renting_delete'),
     path('renting_form/delete_renting/<int:renting_id>', views.renting_delete,
          name='renting_delete'),

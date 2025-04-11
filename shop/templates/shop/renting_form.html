@@ -33,8 +33,9 @@
                                         {{ renting_form | crispy }}
                                         {% csrf_token %}
                                         <!-- Renting action -->
-                                        <a href="{% url 'home' %}"><button id="addToCart" type="submit"
-                                                class="btn bg-dora-dark-blue ">Add to cart</button></a>
+                                        <button id="addToCart" type="submit"
+                                                class="btn bg-dora-dark-blue ">Add to cart
+                                        </button>
                                     </form>
                                 </div>
                             </div>
