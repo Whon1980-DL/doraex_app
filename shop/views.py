@@ -284,7 +284,7 @@ def renting_form(request, slug):
 
                 messages.add_message(
                     request, messages.SUCCESS, 
-                    "Gadget added, please review 'My Rented Gadget "
+                    "Gadget added, please review 'My Rented Gadget' "
                     "to confirm your rent and checkout or contitue shopping "
                     )
 
