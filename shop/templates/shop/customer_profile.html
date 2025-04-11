@@ -9,7 +9,7 @@
             <div class="card">
                     <!-- Customer detail view -->
                 <div class="p-4">
-                    <h3>Customer Detail</h3>
+                    <h3>Customer Profile</h3>
                     <h5>
                         Here is your detail that you have given us. The detail is used for renting purpose. 
                         You can edit your detail where neccessary by clicking the edit button.
@@ -39,14 +39,14 @@
                 <!-- Customer detail edit form-->
                 <div class="p-4">
                     <h3>
-                        Customer Detail Edit Form.
+                        Customer Profile Edit Form.
                     </h3>
                     <hr>
                     <form class="" id="profileEditForm" method="post" style="margin-top: 1.3em;">
                         <p>You are editing your user profile:</p>
                         {{ profile_edit_form | crispy }}
                         {% csrf_token %}
-                        <button id="submitButton" type="submit" class="btn btn-info mt-auto">Update</button>
+                        <button id="submitButton" type="submit" class="btn bg-dora-dark-blue mt-auto">Update</button>
                     </form>
                 </div>
             </div>

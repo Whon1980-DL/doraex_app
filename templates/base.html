@@ -39,9 +39,6 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link {% if request.path == home_url %}active{%endif%}"
                             aria-current="home page" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.path == contact_url %}active{%endif%}" 
-                        aria-current="contact page" href="{% url 'contact' %}">Contact</a>
-                    </li>
                     <!-- Category list -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
@@ -82,6 +79,9 @@
                             href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% endif %}
+                    <li class="nav-item"><a class="nav-link {% if request.path == contact_url %}active{%endif%}"
+                            aria-current="contact page" href="{% url 'contact' %}">Contact</a>
+                    </li>
                 </ul>
                 <!-- View rented gadget and customer profile-->
                 {% if user.is_authenticated %}

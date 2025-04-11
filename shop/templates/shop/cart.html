@@ -11,7 +11,7 @@
             <div class="text-center">
                 <h1 class="display-4 fw-bolder">Your Rentred Gadget</h1>
                 <!-- Chekcing for rent and rent history -->
-                {% if gadget_count_new_customer == 0 %}
+                {% if gadget_count_overall == 0 %}
                 <p class="lead fw-normal text-secondary-50 mb-0">You have no rented gadget please start renting to view
                 </p>
                 {% else %}
@@ -32,8 +32,8 @@
         <section class="py-2">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 table-responsive">
-                    {% if gadget_count > 0 %}
-                    <p>You have {{ gadget_count }} rent pending to confirm for shipping</p>
+                    {% if gadget_count_overall > 0 %}
+                    <p>You have {{ gadget_count_pending }} rent pending to confirm for shipping</p>
                     <table class="table col-4 text-center">
                         <thead class="thead-dark">
                             <tr>
