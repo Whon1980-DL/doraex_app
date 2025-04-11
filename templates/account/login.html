@@ -14,7 +14,7 @@
 
             <p>{% blocktrans %}Welcome back to DoraEx. To rent our amazing range of gadgets, please log in. If
                 you
-                have not created an account yet, then <a class="link-info" href="{{ signup_url }}">sign up</a>
+                have not created an account yet, then <a class="text-dora-blue" href="{{ signup_url }}">sign up</a>
                 first.{% endblocktrans %}</p>
         </div>
     </div>
@@ -26,7 +26,7 @@
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button class="btn btn-info right" type="submit">{% trans "Sign In" %}</button>
+                <button class="btn bg-dora-dark-blue right" type="submit">{% trans "Sign In" %}</button>
             </form>
         </div>
     </div>

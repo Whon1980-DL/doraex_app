@@ -3,26 +3,37 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<!-- index.html content starts here -->
+<!-- html content starts here -->
 <!-- Header-->
-<header class="bg-dora-dark-blue py-5">
+<header class="py-5 bg-dora-dark-blue">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-dark">
-            <h1 class="display-4 fw-bolder">Your Rented Gadgets</h1>
-            <p class="lead fw-normal text-secondary-50 mb-0">Thank you for choosing to rent our gadget. Here are your
-                rents and rent history. Please edit or delete rent where neccessary and confirm detail to proceed to
-                checkout. Your rented gadget will be delivered on the specify date using our very own Anywhere-Door 
-                to rech you so ther is never a delay. Payment is simple and is only taken upon delivery</p>
+            <div class="text-center">
+                <h1 class="display-4 fw-bolder">Your Rentred Gadget</h1>
+                <!-- Chekcing for rent and rent history -->
+                {% if gadget_count_new_customer == 0 %}
+                <p class="lead fw-normal text-secondary-50 mb-0">You have no rented gadget please start renting to view
+                </p>
+                {% else %}
+                <p class="lead fw-normal text-secondary-50 mb-0">Thank you for choosing to rent our gadget. Here are
+                    your
+                    rents and rent history. Please edit or delete rent where necessary and confirm detail to proceed to
+                    checkout. Your rented gadget will be delivered on the specify date using our very own Anywhere-Door
+                    to reach you so there is never a delay. Payment is simple and is only taken upon delivery</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 </header>
 
 <div class="container-fluid">
     <div class="row">
-        <!-- Table of rented gadget -->
+        <!-- List of rent detail -->
         <section class="py-2">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 table-responsive">
+                    {% if gadget_count > 0 %}
+                    <p>You have {{ gadget_count }} rent pending to confirm for shipping</p>
                     <table class="table col-4 text-center">
                         <thead class="thead-dark">
                             <tr>
@@ -41,8 +52,6 @@
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <!-- Rent detal view -->
-                        <p>You have {{ gadget_count }} rent pending to confirm for shipping</p>
                         {% for renting in cart_list %}
                         <tbody>
                             <tr id="renting{{ renting.id }}">
@@ -56,38 +65,40 @@
                                 <td id="email{{renting.id}}">{{ renting.email }}</td>
                                 <td id="phone{{renting.id}}">{{ renting.phone }}</td>
                                 <td id="address{{renting.id}}">{{ renting.address }}</td>
-                                <!-- Rent detail action -->
-                                {% if renting.status == 0 %}<td><button id="deleteButton" type="submit"
+                                <!-- Rent actions -->
+                                {% if renting.status == 0 %}
+                                <td><button id="deleteButton" type="submit"
                                         renting_id="{{ renting.id }}"
                                         class="btn btn-danger btn-delete btn-sm">delete</button></td>
                                 <td><a href="#rentEditForm"><button id="editButton" type="submit"
                                             renting_id="{{ renting.id }}"
-                                            class="btn btn-info btn-edit btn-sm">edit</button></a></td>
+                                            class="btn bg-dora-dark-blue btn-edit btn-sm">edit</button></a></td>
                                 <td><button id="confirmButton" type="submit" renting_id="{{ renting.id }}"
                                         class="btn btn-success btn-confirm btn-sm">Confirm</button></td>{% endif %}
                             </tr>
                             {% endfor %}
                     </table>
+                    {% endif %}
                 </div>
             </div>
         </section>
-        <!-- Rent edit form-->
         <section class="py-2">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
+                    <!-- Creating Rent Edit Form -->
                     <form class="d-none" id="rentEditForm" method="post" style="margin-top: 1.3em;">
                         <p>You are updating detail for renting ID: <strong><span id="rentingIdValue"></span></strong>
                         </p>
                         {{ rent_edit_form | crispy }}
                         {% csrf_token %}
-                        <button id="submitButton" type="submit" class="btn btn-info btn-lg">Update</button>
+                        <button id="submitButton" type="submit" class="btn bg-dora-dark-blue">Update</button>
                     </form>
                 </div>
             </div>
         </section>
     </div>
 </div>
-<!-- Rent confirm confirmation modal -->
+<!-- Rnent confirm confirmation modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -131,8 +142,7 @@
 
 <!-- html content ends here -->
 {% endblock %}
-
-<!-- Javascript for rent actions -->
+<!-- JS for rent actions  -->
 {% block extras %}
 <script src="{% static 'js/rent_edit_confirm_delete.js' %}"></script>
 {% endblock %}

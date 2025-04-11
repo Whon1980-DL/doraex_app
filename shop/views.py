@@ -192,11 +192,12 @@ def cart(request):
     renting = Renting.objects.all()
     customer_rent = renting.filter(customer=customer)
     cart_list = customer_rent.all().order_by('status', '-created_on')
+    gadget_count_new_customer = cart_list.all().count
     gadget_count = cart_list.filter(status=0).count()
     rent_edit_form = RentEditForm()
     
     return render(request, 'shop/cart.html', 
-                  {'cart_list': cart_list, 'gadget_count': gadget_count, 'customer': customer, 'rent_edit_form': rent_edit_form},
+                  {'cart_list': cart_list, 'gadget_count': gadget_count, 'customer': customer, 'rent_edit_form': rent_edit_form, 'gadget_count_new_customer': gadget_count_new_customer},
                   )
 
 
