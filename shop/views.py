@@ -172,7 +172,6 @@ def customer_profile(request):
     username = request.user
 
     if customer.filter(customer=username).exists():
-        print("Entry contained in queryset")
         customer = Customer.objects.get(customer=request.user)
         profile_edit_form = ProfileEditForm()
         return render(request,
@@ -285,8 +284,8 @@ def renting_form(request, slug):
 
                 messages.add_message(
                     request, messages.SUCCESS, 
-                    "Gadget added please review 'My Rented Gadget"
-                    "to confirm you rent and checkout or contitue shopping "
+                    "Gadget added, please review 'My Rented Gadget "
+                    "to confirm your rent and checkout or contitue shopping "
                     )
 
         return HttpResponseRedirect(reverse('cart', args=[]))

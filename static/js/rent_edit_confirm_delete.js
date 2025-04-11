@@ -21,15 +21,14 @@ const deleteConfirm = document.getElementById("deleteConfirm");
 * Initializes edit functionality for the provided edit buttons.
 * 
 * For each button in the `editButtons` collection:
-* - Retrieves the associated comment's ID upon click.
-* - Fetches the content of the corresponding comment.
-* - Populates the `commentText` input/textarea with the comment's content for editing.
-* - Updates the submit button's text to "Update".
-* - Sets the form's action attribute to the `edit_comment/{commentId}` endpoint.
+* - Retrieves the associated renting's ID upon click.
+* - Fetches the content of the corresponding renting detail.
+* - Populates the various input/textarea with the renting detail content for editing.
+* - Sets the form's action attribute to the `edit_renting/{rentingId}` endpoint.
 */
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {
-    let rentingId = e.target.getAttribute("renting_id");
+    let rentingId = e.target.getAttribute("data_renting_id");
     rentEditForm.classList.remove("d-none");
     let rentingIdContent = rentingId;
     rentingIdText.innerHTML = rentingIdContent; 
@@ -50,9 +49,19 @@ for (let button of editButtons) {
   });
 }
 
+/*
+ * Initializes confirmation functionality for the provided confirm buttons.
+ * 
+ * For each button in the `confirmButtons` collection:
+ * - Retrieves the associated renting's ID upon click.
+ * - Updates the `rentConfirm` link's href to point to the 
+ * confirmation endpoint for the specific comment.
+ * - Displays a confirmation modal (`confirmModal`) to prompt 
+ * the user for confirmation before confirming.
+ */
 for (let button of confirmButtons) {
   button.addEventListener("click", (e) => {
-  let rentingId = e.target.getAttribute("renting_id");
+  let rentingId = e.target.getAttribute("data_renting_id");
   rentConfirm.href = `confirm_renting/${rentingId}`;
   confirmModal.show();
   });
@@ -70,7 +79,7 @@ for (let button of confirmButtons) {
 */
 for (let button of deleteButtons) {
   button.addEventListener("click", (e) => {
-    let rentingId = e.target.getAttribute("renting_id");
+    let rentingId = e.target.getAttribute("data_renting_id");
     deleteConfirm.href = `delete_renting/${rentingId}`;
     deleteModal.show();
   });

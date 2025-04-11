@@ -9,7 +9,7 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-dark">
             <div class="text-center">
-                <h1 class="display-4 fw-bolder">Your Rentred Gadget</h1>
+                <h1 class="display-4 fw-bolder">Your Rented Gadget</h1>
                 <!-- Chekcing for rent and rent history -->
                 {% if gadget_count_overall == 0 %}
                 <p class="lead fw-normal text-secondary-50 mb-0">You have no rented gadget please start renting to view
@@ -68,12 +68,12 @@
                                 <!-- Rent actions -->
                                 {% if renting.status == 0 %}
                                 <td><button id="deleteButton" type="submit"
-                                        renting_id="{{ renting.id }}"
+                                        data_renting_id="{{ renting.id }}"
                                         class="btn btn-danger btn-delete btn-sm">delete</button></td>
                                 <td><a href="#rentEditForm"><button id="editButton" type="submit"
-                                            renting_id="{{ renting.id }}"
+                                            data_renting_id="{{ renting.id }}"
                                             class="btn bg-dora-dark-blue btn-edit btn-sm">edit</button></a></td>
-                                <td><button id="confirmButton" type="submit" renting_id="{{ renting.id }}"
+                                <td><button id="confirmButton" type="submit" data_renting_id="{{ renting.id }}"
                                         class="btn btn-success btn-confirm btn-sm">Confirm</button></td>{% endif %}
                             </tr>
                             {% endfor %}
@@ -107,7 +107,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to confrim your rent?
+                Are you sure you want to confirm your rent?
                 Once confirmed the rent can no longer be amended and delivery process will begin.
             </div>
             <div class="modal-footer">

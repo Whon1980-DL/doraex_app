@@ -1,8 +1,8 @@
 from django.db import models
-from cloudinary.models import CloudinaryField
-from django.contrib.auth.models import User
 from datetime import date
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -58,7 +58,7 @@ class Customer(models.Model):
     age = models.IntegerField(blank=False, default="18")
     phone = models.CharField(max_length=50, blank=False)
     email = models.EmailField(max_length=250)
-    shipping_address = models.CharField(max_length=2000, 
+    shipping_address = models.CharField(max_length=2000,
                                         blank=False, default="")
     
     def __str__(self):
@@ -106,10 +106,9 @@ class Renting(models.Model):
     @property
     def Total_price(self):
         """
-        Funciton to calculate total price from quantity and 
+        Funciton to calculate total price from quantity and
         number of days rent.
         """
         total_price = self.price * self.quantity * self.number_days_rent
         return total_price
-    
     
