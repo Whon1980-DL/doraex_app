@@ -10,7 +10,7 @@ const submitButton = document.getElementById("submitButton");
 const rentingIdText = document.getElementById("rentingIdValue");
 
 const confirmModal = new bootstrap.Modal(document.getElementById("confirmModal"));
-const confirmButtons = document.getElementsByClassName('btn-confirm')
+const confirmButtons = document.getElementsByClassName('btn-confirm');
 const rentConfirm = document.getElementById("rentConfirm");
 
 const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));

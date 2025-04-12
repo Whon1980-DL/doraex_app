@@ -30,10 +30,11 @@ Experience your childhood dream of trying many of Doraemon genius gadgets that b
 * [Languages Used](#languages-used)
 * [Databases Used](#databases-used)
 * [Frameworks Used](#frameworks-used)
+* [Template Used](#template-used)
 * [Programs Used](#programs-used)
 ### [Deployment and Local developement](#deployment-and-local-developement-1)
 * [Local Developement](#local-developement)
-* [ElephantSQL Database](#elephantsql-database)
+* [PostgreSQL Database](#postgresql-database)
 * [Cloudinary](#cloudinary)
 * [Heroku Deployment](#heroku-deployment)
 ### [Testing](#testing-1)
@@ -112,7 +113,6 @@ Detailed look can be found in the [project board](https://github.com/users/Whon1
 
 ### Admin user
 
-* Secure and separate login portal for admin users with appropriate access control.
 * Access to an admin dashboard for managing customer profile, gadgets and rentings.
 * Ability to add, edit, or delete gadget listings, including details and price.
 * Managing minumum age usage for appropriate use.
@@ -250,120 +250,105 @@ This data scheme allows for the management of users, customer, category, gadget,
 ![Profile Registration no exiting profile](documentation/readme_images/profile_registration_new_customer.png)
 ![Profile Registration with existing profile](documentation/readme_images/profile_registration_exiting_customer.png)
 
-* Amenities
-    * Description of the amenities which user might like to experience.
+* Gadget cards
+    * As soon as user visit the page they are greet with welcome message and cards of gadgets that depict their attractive short descriptions with price tags. Multiple cards are display on one page to make an impact. User also have an option of viewing by catergory whihc help them desin what is best what to try. User are allowed to view each gadget in detail once click view.
+    * Gadgets are paginated to display 6 gadgets per page
 
-![Amenities](documentation/readme_images/amenities.PNG)
+![Gadget Cards](documentation/readme_images/gadget_cards.png)
+![Category Options](documentation/readme_images/category_options.png)
 
-* Cabin Carousel
-    * When on home page there is a carousel that displays all available cabins for booking, it also has controls to move left or right, name and description of the cabin, when its clicked it redirects users to cabin overview page and visitors are asked to create an account or login in order to view the cabins in greater detail.
+* Gadget View
+    * Once click on each card a suer is redirect to a gadget view of the gadget they click. The page display full description, intended usage, warning if any price and age recommedation. Option to start renting will apear if the user already logged in if not the message on rent button will ask the user to log in and create customer profile instead. 
 
-![Cabin Carousel](documentation/readme_images/carousel.PNG)
-
-* About Section
-    * It contains a short description of Woodland Whispers Retreat and a short lake tale
-
-![About](documentation/readme_images/about.PNG)
+![Gadget View Logged In](documentation/readme_images/gadget_view_looged_in.png)
+![Gadget View Non Looged In](documentation/readme_images/gadget_view_non_logged_in.png)
 
 * Footer
-    * Contains copyright information, creator and social links which are all linked to the creator of the website, becuase purpouse of this website is educational.
+    * Contains copyright information, creator and social links.
 
-![Footer](documentation/readme_images/footer.PNG)
+![Footer](documentation/readme_images/footer.png)
 
 * Contact Page
-    * For educational purposes, the website includes fictional contact information such as an address, phone number, and email. It also includes social links, which are all linked to developer for educational purposes.
+    * For educational purposes, the website includes fictional contact information such as an address, phone number, and email. 
 
-![Contact](documentation/readme_images/contact.PNG)
+![Contact](documentation/readme_images/contact.png)
 
 * Sign up
     * User can create an account
 
-![Sign Up](documentation/readme_images/sign-up.PNG)
+![Sign Up](documentation/readme_images/sign_up.png)
 
 * Login
     * User can login into an account, if they have created one
 
-![Login](documentation/readme_images/login.PNG)
-![Login Message](documentation/readme_images/login-message.PNG)
+![Login](documentation/readme_images/logged_in.png)
+![Login Message](documentation/readme_images/login_message.png)
 
-* Browse Available Cabins
-    * Admin can create cabins through django admin panel
-    * Cabins are paginated to display 6 cabins per page
-
-![Browse Cabins](documentation/readme_images/browse-cabins.PNG)
-
-* Cabin pagination
+* Gadget pagination
     * On the bottom of the page
 
-![Pagination](documentation/readme_images/pagination.PNG)
+![Pagination](documentation/readme_images/pagination.png)
 
 * Logout
     * User can logout
 
-![Logout](documentation/readme_images/logout.PNG)
+![Logout](documentation/readme_images/logout.png)
 
-* Make a Booking
-    * Users can make a booking by clicking the cabin they want and then read details and fill in the booking form.
-    * Form validation is implemented to make sure form are submitted correctly and if there is an error user will be notified with alert message, also if everything is good, user gets a message to notifiy them.
-    * Form contains amenities which are completely optional and they dont have to be selected.
+* Make a Renting
+    * Users can make a renting by clicking view button on the gadget they want and then read details and then click rent if already have customer profile then will be able to fill in rent form.
+    * Form validation is implemented to make sure form are submitted correctly and if there is an erro user will be notified with alert message, also if everything is good, user gets a message to notifiy them.
+    * If user has not already got a customer profile then by clicking rent will redirect use to customer profile registration page and once complete the page will redirect user straight to the rent form of that gadget.Messge display to notify successful of customer profile registration. if the user is below the age of minimum usage age a alert message wil display and prevent the user from renting.
 
-    ![Message](documentation/readme_images/alert-message.PNG)
+    ![Click Rent Without Customer PRofile](documentation/readme_images/rent_without_profile.png)
 
-![Make a Booking](documentation/readme_images/make-a-booking.PNG)
+    ![Message](documentation/readme_images/messge_profile_creation.png)
 
-* Booking Succesful
-    * If booking is succesfull, user gets a notified message and an overview of the booking they just made, which includes all the details and a total price of the booking, also there is a button for contact page and my booking button that leads to all of the users bookings.
+![Renting](documentation/readme_images/renting.png)
+![Age Alert](documentation/readme_images/age_restriction.png)
 
-![Booking Succesful](documentation/readme_images/booking-successful.PNG)
+* Renitng Successful
+    * If renting is succesfull, user gets a notified message and an overview of the rentinging they just made, which includes all the details and a total price of the renting. The new rent will shows among other rent in the rent history and non-confimred rent will have delete, edit and confirm buttons.
 
-* Booking Overview
-    * Includes all of the user bookings, which have buttons to edit or delete bookings.
+* Edit Renting
+    * User can change their renting and save changes
 
-![Booking Overview](documentation/readme_images/my-bookings.PNG)
+![Edit Renting](documentation/readme_images/rent_edit.png)
 
-* Already booked dates
-    * User won't be able to book dates that are already booked.
-    * Dates in the past are unavailable.
+* Delete Renting
+    * User can delete their renting, before it is deleted it has to be confirmed.
 
-![Booked Dates](documentation/readme_images/booked-dates.PNG)
+![Delete Renting](documentation/readme_images/rent_delete.png)
 
-* Edit Booking
-    * User can change their booking and save changes
+* Confirm Renting
+    * User can confirm renting whihc will update status inthe backend from pedning to comlete after which no editing can be made and shipping process begin according to start date specified.
 
-![Edit Booking](documentation/readme_images/edit-booking.PNG)
-
-* Delete Booking
-    * User can delete their booking, before it is deleted it has to be confirmed.
-
-![Delete Booking](documentation/readme_images/delete-booking.PNG)
+![Comfirm Renting](documentation/readme_images/rent_confirm.png)
+![After Rent Confirmed](documentation/readme_images/after_rent_confirm.png)
 
 * Alert messages
     * For every action there is an alert message to notify user
     * Here is one example
 
-![Alert Message](documentation/readme_images/delete-message.PNG)
+![Alert Message](documentation/readme_images/delete_message.png)
 
 * Admin Features
     * Django built in admin panel allows admin control over the website.
-    * Admin can access admin panel through his navigation bar
-    * Can add, update, delete cabins.
-    * Create amenities, update existing amenities which are connected to the cabins.
-    * Delete accounts, verifiy emails, delete bookings...
-
-* Error Pages
-    * There are custom 404 and 500 error pages set up.
-    * They contain buttons to redirect to home page if there is an error.
-
-![Error 404](documentation/readme_images/error.PNG)
-![Error 500](documentation/readme_images/500-error-page.PNG)
+    * Admin can access admin panel by appending /admin to url
+    * Can add, update, delete gadgets.
+    * Delete accounts and delete rentings...
 
 ### Features Left to Implement 
 
-* User Reviews: Allow users to leave reviews and ratings for cabins they have booked, providing valuable feedback for other users.
-* Advanced Search: Implement an advanced search functionality, enabling users to search for cabins based on specific criteria such as price range, amenities, and availability.
-* Cabin Recommendations: Develop a recommendation engine that suggests cabins to users based on their previous bookings, interests, or preferences.
-* Online Payment: Implement an online payment system to allow users to securely make payments for their bookings directly through the website.
-* For the purposes of this project these implemenation were not necessary.
+* Features left to implement are outline in the NINTH in the Kanban borad and include the following
+    * Ability to review gadgets and giives star rating alng with being able to edit and delete review for enganging in conversation.
+    * Login or sign up using social media account.
+    * Ability to fill in form to contact the site owner with reply message stating message recieved and await respose.
+    * Ability to varify age through provision of valid ID and age can only be enterd by admin and not editable by user.
+    * Option to browse gadgets by age recommedation.
+    * Search engine with the abilty to serach keywords and usage.
+    * Adding gadget rent count to display as smal number next to link to indicate number of rent made.
+    * Have models and view to check for gadget inventory and availability
+    * For the purposes of this project these implemenation were not necessary.
 
 ## Technologies Used
 
@@ -376,69 +361,66 @@ This data scheme allows for the management of users, customer, category, gadget,
 
 ### Databases Used
 
-* [ElephantSQL](https://www.elephantsql.com/) - Postgres database
+* [PpstgreSQL](https://www.postgresql.org/) - Postgres database
 * [Cloudinary](https://cloudinary.com/) - Online static file storage
 
 ### Frameworks Used
 
 * [Django](https://www.djangoproject.com/) - Python framework
-* [Bootstrap 4.6.1](https://getbootstrap.com/docs/4.6/getting-started/introduction/) - CSS framework
+* [Bootstrap 5.2.3](https://getbootstrap.com/) - CSS framework
+
+### Template Used
+* [Startbootstrap](https://startbootstrap.com/template/shop-homepage) 
 
 ### Programs Used
 
 * [Github](https://github.com/) - Storing the code online
-* [Gitpod](https://www.gitpod.io/) - To write the code.
+* [VSCODE](https://code.visualstudio.com/) - To write the code.
 * [Heroku](https://www.heroku.com/) - Used as the cloud-based platform to deploy the site.
 * [Google Fonts](https://fonts.google.com/) - Import main font the website.
 * [Figma](https://www.figma.com/) - Used to create wireframes and schemes
-* [Craiyon](https://www.craiyon.com/) - Generate AI images of cabins and logo based on my words descriptions
+* [LucidChart](https://lucid.app) - Used to draw User Journey and ERD diagram
 * [Am I Responsive](https://ui.dev/amiresponsive) - To show the website image on a range of devices.
 * [Git](https://git-scm.com/) - Version control
-* [Jinja](https://jinja.palletsprojects.com/en/3.1.x/) - Templating engine
-* [Favicon Generator](https://realfavicongenerator.net/) - Used to create a favicon
+* [ImgeColourPicker](https://imagecolorpicker.com/) - To identify colour of interest form an image.
 * [JSHint](https://jshint.com/) - Used to validate JavaScript
 * [W3C Markup Validation Service](https://validator.w3.org/) - Used to validate HTML
 * [CSS Validation Service](https://jigsaw.w3.org/css-validator/) - Used to validate CSS
 * [CI Python Linter](https://pep8ci.herokuapp.com/#) - Used to validate Python
-* [Colormind](http://colormind.io/) - Color Scheme
+* [Coolors](https://coolors.co/) - Color Scheme
 
 ## Deployment and Local Developement
 
-Live deployment can be found on this [View Woodland Whispers Retreat live website here](https://woodland-whispers-retreat.herokuapp.com/)
+Live deployment can be found on this [View DoraExlive website here](https://doraex-app-b88d916586ec.herokuapp.com/)
 
 ### Local Developement
 
 #### How to Fork
 1. Log in(or Sign Up) to Github
-2. Go to repository for this project [Woodland Whispers Retreat](https://github.com/Thomas-Tomo/woodland-whispers-retreat)
+2. Go to repository for this project [DoraEx](https://github.com/Whon1980-DL/doraex_app)
 3. Click the fork button in the top right corner
 
 #### How to Clone
 1. Log in(or Sign Up) to Github
-2. Go to repository for this project [Woodland Whispers Retreat](https://github.com/Thomas-Tomo/woodland-whispers-retreat)
+2. Go to repository for this project [DoraEx](https://github.com/Whon1980-DL/doraex_app)
 3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
 4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 5. Type the following command in the terminal (after the git clone you will need to paste the link you copied in step 3 above)
 6. Set up a virtual environment (this step is not required if you are using the Code Institute Template in GitPod as this will already be set up for you).
 7. Install the packages from the requirements.txt file - run Command pip3 install -r requirements.txt
 
-### ElephantSQL Database
-[Woodland Whispers Retreat](https://github.com/Thomas-Tomo/woodland-whispers-retreat) is using [ElephantSQL](https://www.elephantsql.com/) PostgreSQL Database
+### PostgreSQL Database
+[DoraEx](https://github.com/Whon1980-DL/doraex_app) is using [PpstgreSQL](https://www.postgresql.org/) PostgreSQL Database
 
-1. Click Create New Instance to start a new database.
-2. Provide a name (this is commonly the name of the project: tribe).
-3. Select the Tiny Turtle (Free) plan.
-4. You can leave the Tags blank.
-5. Select the Region and Data Center closest to you.
-6. Once created, click on the new database name, where you can view the database URL and Password.
+* The database is online and is provided by Code Institue.
+* Account credential is provided and is used through all stages of development to access database.
 
 ### Cloudinary
-[Woodland Whispers Retreat](https://github.com/Thomas-Tomo/woodland-whispers-retreat) is using [Cloudinary](https://cloudinary.com/)
+[DoraEx](https://github.com/Whon1980-DL/doraex_app) is using [Cloudinary](https://cloudinary.com/)
 1. For Primary interest, you can choose Programmable Media for image and video API.
 2. Optional: edit your assigned cloud name to something more memorable.
 3. On your Cloudinary Dashboard, you can copy your API Environment Variable.
 4. Be sure to remove the CLOUDINARY_URL= as part of the API value; this is the key.
-
 
 
 ### Heroku Deployment
@@ -459,18 +441,18 @@ Live deployment can be found on this [View Woodland Whispers Retreat live websit
 * Add the STATIC files settings - the url, storage path, directory path, root path, media url and default file storage path.
 * Link the file to the templates directory in Heroku.
 * Change the templates directory to TEMPLATES_DIR
-* Add Heroku to the ALLOWED_HOSTS list the format ['app_name.heroku.com', 'localhost']
+* Add Heroku to the ALLOWED_HOSTS list the format ['app_name.heroku.com', '127.0.0.1']
 
 #### Add the following Config Vars in Heroku:
 
 * SECRET_KEY - This can be any Django random secret key
 * CLOUDINARY_URL - Insert your own Cloudinary API key
 * PORT = 8000
-* DISABLE_COLLECTSTATIC = 1 - this is temporary, and can be removed for the final deployment
-* DATABASE_URL - Insert your own ElephantSQL database URL here
+* DATABASE_URL - Insert your own PostgreSQL database URL here
 
-#### Heroku needs two additional files to deploy properly
+#### Heroku needs three additional files to deploy properly
 
+* python-version
 * requirements.txt
 * Procfile
 
@@ -491,7 +473,7 @@ Please see  [TESTING.md](TESTING.md) for all the detailed testing performed.
 
 * [Stack Overflow](https://stackoverflow.com/)
 * [Code Institute](https://learn.codeinstitute.net/dashboard)
-* [Bootstrap 4.6](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
+* [Startbootsratp](https://startbootstrap.com/template/shop-homepage) 
 * [Django docs](https://docs.djangoproject.com/en/4.2/releases/3.2/)
 * [Django Allauth](https://django-allauth.readthedocs.io/en/latest/)
 * [Django and Static Assets](https://devcenter.heroku.com/articles/django-assets)
@@ -500,10 +482,12 @@ Please see  [TESTING.md](TESTING.md) for all the detailed testing performed.
 
 ### Content
 
-* All of the content is imaginary and written by the developer, me, Thomas-Tomo Domitrovic.
-* All images were generated with Artificial intelligence (AI) based on my word input and description of the cabins and logo.
+* All of the content is imaginary and written by the developer, Whon1980-DL.
+* All images were sources from Doraemon Wiki fan page. 
+* [Doraemon Wiki](https://doraemon.fandom.com/wiki/Doraemon)
 
 ### Acknowledgments
 
 * I would like to thank my mentor for support and feedback throughout this project, Mitko Bachvarov.
 * I would also like to extend my appreciation to the Slack community for their continuous engagement and willingness to share knowledge. The collaborative environment provided a platform for learning, troubleshooting, and gaining inspiration from fellow developers.
+* I would like to thank my wife, Nan, for her full support and my two children, Dylan and Logan for being patient with me throughout the development.  
