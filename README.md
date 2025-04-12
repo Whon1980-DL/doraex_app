@@ -150,31 +150,31 @@ Space Mono is used as the main font throught use of Boostrap ready made template
 
 1. AllAuth User Model
     * Django Allauth, the User model is the default user model provided by the Django authentication system
-    * The User entity has a one-to-many relationship with the Renting entity. This means that a User can have multiple Rentings, but each Renting is associated with only one User.
+    * The User entity has a one-to-many relationship with the Renting entity. This means that a User can have multiple Rantings, but each Renting is associated with only one User.
 ---
 2. Category Model
-    * Category model associate with gadget model on  many to one basis. More than one gaget can belong to oen category
-    * This allow gadget to be grouped and makes it easy to browse teh gadgets.
+    * Category model associate with gadget model on  many to one basis. More than one gadget can belong to one category
+    * This allow gadget to be grouped and makes it easy to browse the gadgets.
 ---
 3. Customer Model
-    * Customer model is related to user model on a one-to-one basis ehihc mean one user can only have one customer profile. 
-    * The cusotmer in turn is related to gadgets and renting model on a one-to-many basis. Which mean one cusotmer can rent many gadget and have many renting. 
-    * Admin can edit customer profile in case an id need to be provided to prove the custome's age and user can also edit their own profile.
-    * The customer model allow cusotmer profiel creation for quick booking process as most field in booking form can be autofilled from teh customer existing detail in their customer profile and the detail can be edited.
+    * Customer model is related to user model on a one-to-one basis which mean one user can only have one customer profile. 
+    * The customer in turn is related to gadgets and renting model on a one-to-many basis. Which means one customer can rent many gadget and have many renting. 
+    * Admin can edit customer profile in case an id needs to be provided to prove the customer’s age and user can also edit their own profile.
+    * The customer model allow customer profile creation for quick booking process as most field in booking form can be autofilled from the customer existing detail in their customer profile and the detail can be edited.
 ---
 3. Gadget Model
-    * A Gadget can have multiple Rentings, but each Rentinging is associated with only one Gadget. This is represented by the foreign key relationship between Gadget and Renting.
-    * Admin can add gadget through djangos admin panel.
+    * A Gadget can have multiple Rantings, but each Renting is associated with only one Gadget. This is represented by the foreign key relationship between Gadget and Renting.
+    * Admin can add gadget through Django admin panel.
     * Only Admin can change the data in the backend.
     * User can see the gadget information and image based on the chosen gadget.
-    * Information provided is price, image, description, intended use, warning and minumum usage age.
+    * Information provided is price, image, description, intended use, warning and minimum usage age.
 ---
 4. Renting Model
-    * A User can have multiple Rentings, but each Renting is associated with only one User. This is represented by the foreign key relationship between User and Booking.
+    * A User can have multiple Renting, but each Renting is associated with only one User. This is represented by the foreign key relationship between User and Booking.
     * Renting model has a feature to prevent under age renting thus making it safe.
-    * Total price is also calculated in the backend that is then displayed to user to show the total price of the renting, depeding on the rent duration and quantity of each gadget rent.
+    * Total price is also calculated in the backend that is then displayed to user to show the total price of the renting, depending on the rent duration and quantity of each gadget rent.
     * Full CRUD functionality is available to the user.
-    * User in order to rent has to fill start date, number of day rent and quanity of gadget.
+    * User in order to rent has to fill start date, number of day rent and quantity of gadget.
     ---
 
 ### User Journey 
@@ -187,12 +187,12 @@ Entity Relationship Diagram (ERD)
 
 ![DataScheme](documentation/readme_images/erd.png)
 
-* The Customer entity represents customers that can be associated with renting, with fields id as the primary key. first_name for first anme, last_name for lst name, age for age and contact detail etc.
-* The Category entity represents catergory to group gadget together with a field of category name.
-* The Gadget entity represents individual gadget listings, with fields id as the primary key, name for the gadget's name, description for the gadget's description, price for the gadget's price, image for the gadget's image, minumun_use_age for age resitiction, and warning and inteded use for customer guideline.
-* The Rentinging entity represents a renting made by a customer for a specific gadget, with fields id as the primary key, gadget as a foreign key referencing the Gadget entity, custoemr as a foreign key referencing the Customer entity, start_date for the renting start date, end_date for gadget return date, number_days_rent  for rent duration and total_price is calculate using a decorator function.
+* The Customer entity represents customers that can be associated with renting, with fields id as the primary key. first_name for first name, last_name for last name, age for age and contact detail etc.
+* The Category entity represents category to group gadget together with a field of category name.
+* The Gadget entity represents individual gadget listings, with fields id as the primary key, name for the gadget's name, description for the gadget's description, price for the gadget's price, image for the gadget's image, minimun_use_age for age restriction, and warning and intended use for customer guideline.
+* The Renting entity represents a renting made by a customer for a specific gadget, with fields id as the primary key, gadget as a foreign key referencing the Gadget entity, customer as a foreign key referencing the Customer entity, start_date for the renting start date, end_date for gadget return date, number_days_rent  for rent duration and total_price is calculate using a decorator function.
 
-This data scheme allows for the management of users, customer, category, gadget, and retings. Users can make rentingings for specific gdgets, and each renting can have associated details such as the start_date, rent duration and quantity of gadget to rent.
+This data scheme allows for the management of users, customer, category, gadget, and renting. Users can make renting for specific gadgets, and each renting can have associated details such as the start_date, rent duration and quantity of gadget to rent.
 
 ## Security Features
 
@@ -251,7 +251,7 @@ This data scheme allows for the management of users, customer, category, gadget,
 ![Profile Registration with existing profile](documentation/readme_images/profile_registration_exiting_customer.png)
 
 * Gadget cards
-    * As soon as user visit the page they are greet with welcome message and cards of gadgets that depict their attractive short descriptions with price tags. Multiple cards are display on one page to make an impact. User also have an option of viewing by catergory whihc help them desin what is best what to try. User are allowed to view each gadget in detail once click view.
+    * As soon as user visit the page they are greet with welcome message and cards of gadgets that depict their attractive short descriptions with price tags. Multiple cards are display on one page to make an impact. User also have an option of viewing by category which help them design what is best what to try. User are allowed to view each gadget in detail once click view.
     * Gadgets are paginated to display 6 gadgets per page
 
 ![Gadget Cards](documentation/readme_images/gadget_cards.png)
@@ -296,8 +296,8 @@ This data scheme allows for the management of users, customer, category, gadget,
 
 * Make a Renting
     * Users can make a renting by clicking view button on the gadget they want and then read details and then click rent if already have customer profile then will be able to fill in rent form.
-    * Form validation is implemented to make sure form are submitted correctly and if there is an erro user will be notified with alert message, also if everything is good, user gets a message to notifiy them.
-    * If user has not already got a customer profile then by clicking rent will redirect use to customer profile registration page and once complete the page will redirect user straight to the rent form of that gadget.Messge display to notify successful of customer profile registration. if the user is below the age of minimum usage age a alert message wil display and prevent the user from renting.
+    * Form validation is implemented to make sure form are submitted correctly and if there is an error user will be notified with alert message, also if everything is good, user gets a message to notify them.
+    * If user has not already got a customer profile then by clicking rent will redirect use to customer profile registration page and once complete the page will redirect user straight to the rent form of that gadget. Message display to notify successful of customer profile registration. if the user is below the age of minimum usage age a alert message will display and prevent the user from renting.
 
     ![Click Rent Without Customer PRofile](documentation/readme_images/rent_without_profile.png)
 
@@ -306,8 +306,8 @@ This data scheme allows for the management of users, customer, category, gadget,
 ![Renting](documentation/readme_images/renting.png)
 ![Age Alert](documentation/readme_images/age_restriction.png)
 
-* Renitng Successful
-    * If renting is succesfull, user gets a notified message and an overview of the rentinging they just made, which includes all the details and a total price of the renting. The new rent will shows among other rent in the rent history and non-confimred rent will have delete, edit and confirm buttons.
+* Renting Successful
+    * If renting is successful, user gets a notified message and an overview of the renting they just made, which includes all the details and a total price of the renting. The new rent will shows among other rent in the rent history and non-confirmed rent will have delete, edit and confirm buttons.
 
 * Edit Renting
     * User can change their renting and save changes
@@ -339,16 +339,16 @@ This data scheme allows for the management of users, customer, category, gadget,
 
 ### Features Left to Implement 
 
-* Features left to implement are outline in the NINTH in the Kanban borad and include the following
-    * Ability to review gadgets and giives star rating alng with being able to edit and delete review for enganging in conversation.
+* Features left to implement are outline in the NINTH in the Kanban board and include the following
+    * Ability to review gadgets and gives star rating along with being able to edit and delete review for engaging in conversation.
     * Login or sign up using social media account.
-    * Ability to fill in form to contact the site owner with reply message stating message recieved and await respose.
-    * Ability to varify age through provision of valid ID and age can only be enterd by admin and not editable by user.
-    * Option to browse gadgets by age recommedation.
-    * Search engine with the abilty to serach keywords and usage.
-    * Adding gadget rent count to display as smal number next to link to indicate number of rent made.
+    * Ability to fill in form to contact the site owner with reply message stating message received and await response.
+    * Ability to verify age through provision of valid ID and age can only be entered by admin and not editable by user.
+    * Option to browse gadgets by age recommendation.
+    * Search engine with the ability to search keywords and usage.
+    * Adding gadget rent count to display as small number next to link to indicate number of rent made.
     * Have models and view to check for gadget inventory and availability
-    * For the purposes of this project these implemenation were not necessary.
+    * For the purposes of this project these implementation were not necessary.
 
 ## Technologies Used
 
@@ -410,7 +410,7 @@ Live deployment can be found on this [View DoraExlive website here](https://dora
 7. Install the packages from the requirements.txt file - run Command pip3 install -r requirements.txt
 
 ### PostgreSQL Database
-[DoraEx](https://github.com/Whon1980-DL/doraex_app) is using [PpstgreSQL](https://www.postgresql.org/) PostgreSQL Database
+[DoraEx](https://github.com/Whon1980-DL/doraex_app) is using [PostgreSQL](https://www.postgresql.org/) PostgreSQL Database
 
 * The database is online and is provided by Code Institue.
 * Account credential is provided and is used through all stages of development to access database.
